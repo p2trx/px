@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package px;
+
+service Browser {
+    rpc Do(DoRequest) returns (DoResponse) {}
+}
+
+message DoResponse {
+}
+
+message DoRequest {
+    repeated Action actions = 1;
+}
+
+message Action {
+    oneof action_oneof {
+        LaunchAction launchAction = 1;
+        GotoAction gotoAction = 2;
+        ClickAction clickAction = 3;
+        TypeAction typeAction = 4;
+        SelectAction selectAction = 5;
+        StoreInnerTextAction storeInnerTextAction = 7;
+        StoreEvalAction storeEvalAction = 6;
+    }
+}
+
+message LaunchAction {
+    bool headless = 1;
+}
+
+message GotoAction {
+    string url = 1; // https://www.google.com
+}
+
+message ClickAction {
+    string selector = 1;
+}
+
+message TypeAction {
+    string selector = 1;
+    string text = 2;
+}
+
+message SelectAction {
+    string selector = 1;
+    repeated string values = 2;
+}
+
+message StoreInnerTextAction {
+    string key = 1;
+    string selector = 2;
+}
+
+message StoreEvalAction {
+    string key = 1;
+    string script = 2;
+}
