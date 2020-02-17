@@ -73,12 +73,7 @@
       "selectAction": {
         "selector": "#expectation",
         "values": [
-          "High salary",
-          "Nice manager/leader",
-          "Excellent colleagues",
-          "Good teamwork",
-          "Chance to go onsite",
-          "Challenging"
+          "High salary"
         ]
       }
     },
