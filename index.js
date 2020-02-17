@@ -13,7 +13,6 @@ function doAction(call, callback) {
         resolve()
     })
     const { actions } = call.request
-    let result
     actions.forEach(function(action) {
         if (action.launchAction) {
             p = p.then(async function() {
@@ -50,11 +49,11 @@ function doAction(call, callback) {
                 const { selector } = action.getInnerTextAction
                 const element = await page.waitForSelector(selector)
                 const innerText = await element.evaluate(e => e.innerText)
-                result = innerText
+                return innerText
             })
         }
     })
-    p.then(function() {
+    p.then(function(result) {
         callback(null, {
             result
         })

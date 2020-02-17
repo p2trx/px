@@ -124,8 +124,7 @@
       }
     },
     {
-      "storeInnerTextAction": {
-        "key": "message",
+      "getInnerTextAction": {
         "selector": "#submit-msg"
       }
     }
