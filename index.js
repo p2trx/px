@@ -5,77 +5,60 @@ const protoLoader = require('@grpc/proto-loader')
 
 const puppeteer = require('puppeteer')
 
-const queue = require('queue')
-
-const q = queue({
-    concurrency: 1,
-    autostart: true
-})
-q.on('error', function() {
-    console.log('Error: ', arguments)
-})
-
-const results = []
-
 let browser
 let page
 
 function doAction(call, callback) {
+    let p = new Promise(function(resolve) {
+        resolve()
+    })
     const { actions } = call.request
+    let result
     actions.forEach(function(action) {
         if (action.launchAction) {
-            q.push(async function(cb) {
+            p = p.then(async function() {
                 const { headless } = action.launchAction
                 browser = await puppeteer.launch({ headless })
                 page = await browser.newPage()
-                await page.setViewport({ width: 1024, height: 768})
-                cb()
+                return page.setViewport({ width: 1024, height: 768})
             })
         } else if (action.gotoAction) {
-            q.push(async function(cb) {
+            p = p.then(async function() {
                 const { url } = action.gotoAction
-                await page.goto(url)
-                cb()
+                return page.goto(url)
             })
         } else if (action.clickAction) {
-            q.push(async function(cb) {
+            p = p.then(async function() {
                 const { selector } = action.clickAction
                 await page.waitForSelector(selector)
-                await page.click(selector)
-                cb()
+                return page.click(selector)
             })
         } else if (action.typeAction) {
-            q.push(async function(cb) {
+            p = p.then(async function(cb) {
                 const { selector, text } = action.typeAction
                 await page.waitForSelector(selector)
-                await page.type(selector, text)
-                cb()
+                return page.type(selector, text)
             })
         } else if (action.selectAction) {
-            q.push(async function(cb) {
+            p = p.then(async function(cb) {
                 const { selector, values } = action.selectAction
                 await page.waitForSelector(selector)
-                await page.select(selector, ...values)
-                cb()
+                return page.select(selector, ...values)
             })
-        } else if (action.storeInnerTextAction) {
-            q.push(async function(cb) {
-                const { key, selector } = action.storeInnerTextAction
+        } else if (action.getInnerTextAction) {
+            p = p.then(async function(cb) {
+                const { selector } = action.getInnerTextAction
                 const element = await page.waitForSelector(selector)
-                const innerText = await page.$eval(selector, e => e.innerText);
-                console.log(innerText)
-                cb()
-            })
-        } else if (action.storeEvalAction) {
-            q.push(async function(cb) {
-                const { key, script } = action.storeEvalAction
-                const result = await page.evaluate(script)
-                console.log(result)
-                cb()
+                const innerText = await element.evaluate(e => e.innerText)
+                result = innerText
             })
         }
     })
-    callback(null, { })
+    p.then(function() {
+        callback(null, {
+            result
+        })
+    })
 }
 
 function main() {

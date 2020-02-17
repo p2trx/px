@@ -20,8 +20,7 @@ message Action {
         ClickAction clickAction = 3;
         TypeAction typeAction = 4;
         SelectAction selectAction = 5;
-        StoreInnerTextAction storeInnerTextAction = 7;
-        StoreEvalAction storeEvalAction = 6;
+        GetInnerTextAction getInnerTextAction = 6;
     }
 }
 
@@ -47,12 +46,6 @@ message SelectAction {
     repeated string values = 2;
 }
 
-message StoreInnerTextAction {
-    string key = 1;
-    string selector = 2;
-}
-
-message StoreEvalAction {
-    string key = 1;
-    string script = 2;
+message GetInnerTextAction {
+    string selector = 1;
 }

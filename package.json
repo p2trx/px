@@ -12,8 +12,7 @@
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "grpc": "^1.24.2",
-    "puppeteer": "^2.1.1",
-    "queue": "^6.0.1"
+    "puppeteer": "^2.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
