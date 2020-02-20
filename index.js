@@ -16,7 +16,7 @@ function doAction(call, callback) {
     actions.forEach(function(action) {
         if (action.launchAction) {
             p = p.then(async function() {
-                const { headless } = action.launchAction
+                const { headless = false } = action.launchAction
                 browser = await puppeteer.launch({ headless })
                 page = await browser.newPage()
                 return page.setViewport({ width: 1024, height: 768})
