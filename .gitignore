@@ -1,2 +1,4 @@
 node_modules
 px.iml
+target/*
+.idea/*
