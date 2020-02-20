@@ -1,4 +1,7 @@
 node_modules
 px.iml
-target/*
-.idea/*
+**/target/*
+**/.idea/*
+.classpath
+.project
+.settings/*
