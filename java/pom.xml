@@ -18,4 +18,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub p2trx Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/p2trx/px</url>
+        </repository>
+    </distributionManagement>
 </project>
