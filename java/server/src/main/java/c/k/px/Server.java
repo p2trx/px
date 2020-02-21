@@ -1,10 +1,10 @@
-package com.katalon.px;
+package c.k.px;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import com.katalon.px.service.BrowserService;
+import c.k.px.service.BrowserService;
 
 import io.grpc.ServerBuilder;
 

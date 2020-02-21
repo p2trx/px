@@ -1,4 +1,4 @@
-package com.katalon.px;
+package c.k.px;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;

@@ -1,8 +1,8 @@
-package com.katalon.px.service;
+package c.k.px.service;
 
-import com.katalon.px.BrowserGrpc;
-import com.katalon.px.DoRequest;
-import com.katalon.px.DoResponse;
+import c.k.px.BrowserGrpc;
+import c.k.px.DoRequest;
+import c.k.px.DoResponse;
 
 import io.grpc.stub.StreamObserver;
 
