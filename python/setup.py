@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
+import px;
 
 setup(
     name='px',
-    version='0.0.1',
+    version=px.__version__,
     packages=find_packages(),
     install_requires=['grpcio>=1.27.2'],
     author='p2trx',
