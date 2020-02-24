@@ -1,4 +1,8 @@
-import conda.cli as cli
+from setuptools import setup, find_packages
 
-cli.main('conda', 'create',  '-n', 'px', '-y', 'python=3.7')
-cli.main('conda', 'install', '--file', 'requirements.txt', '-n', 'px', '-y')
+setup(
+    name='px',
+    version='1.0.0',
+    packages=find_packages(),
+    install_requires=['grpcio', 'grpcio-tools'],
+)
