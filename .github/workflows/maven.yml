@@ -1,6 +1,9 @@
-name: Java CI
+name: Publish to Github Package
 
-on: [push]
+on: 
+  push:
+    branches:
+      - release  
 
 jobs:
   build:
