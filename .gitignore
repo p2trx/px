@@ -7,3 +7,4 @@ node_modules
 **/*.iml
 .vscode
 __pycache__
+python/px/px_pb2*.py
