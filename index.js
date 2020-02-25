@@ -3,10 +3,7 @@ const path = require('path')
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
 
-const puppeteer = require('puppeteer')
-
-let browser
-let page
+const Browser = require('./browser');
 
 function doAction(call, callback) {
     let p = new Promise(function(resolve) {
@@ -15,41 +12,34 @@ function doAction(call, callback) {
     const { actions } = call.request
     actions.forEach(function(action) {
         if (action.launchAction) {
-            p = p.then(async function() {
+            p = p.then(function() {
                 const { headless = false } = action.launchAction
-                browser = await puppeteer.launch({ headless })
-                page = await browser.newPage()
-                return page.setViewport({ width: 1024, height: 768})
+                return Browser.launchAction(headless);
             })
         } else if (action.gotoAction) {
-            p = p.then(async function() {
+            p = p.then(function() {
                 const { url } = action.gotoAction
-                return page.goto(url)
+                return Browser.goToPage(url);
             })
         } else if (action.clickAction) {
-            p = p.then(async function() {
+            p = p.then(function() {
                 const { selector } = action.clickAction
-                await page.waitForSelector(selector)
-                return page.click(selector)
+                return Browser.click(selector)
             })
         } else if (action.typeAction) {
-            p = p.then(async function(cb) {
+            p = p.then(function() {
                 const { selector, text } = action.typeAction
-                await page.waitForSelector(selector)
-                return page.type(selector, text)
+                return Browser.type(selector, text)
             })
         } else if (action.selectAction) {
-            p = p.then(async function(cb) {
+            p = p.then(function(cb) {
                 const { selector, values } = action.selectAction
-                await page.waitForSelector(selector)
-                return page.select(selector, ...values)
+                return Browser.select(selector, values)
             })
         } else if (action.getInnerTextAction) {
-            p = p.then(async function(cb) {
+            p = p.then(function(cb) {
                 const { selector } = action.getInnerTextAction
-                const element = await page.waitForSelector(selector)
-                const innerText = await element.evaluate(e => e.innerText)
-                return innerText
+                return Browser.getInnerText(selector)
             })
         }
     })
