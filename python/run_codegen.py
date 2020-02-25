@@ -9,7 +9,7 @@ os.chdir(sys.path[0])
 protoc.main((
     '',
     '--proto_path=../proto',
-    '--python_out=px',
-    '--grpc_python_out=px',
-    '../proto/px.proto',
+    '--python_out=.',
+    '--grpc_python_out=.',
+    '../proto/px/px.proto',
 ))
