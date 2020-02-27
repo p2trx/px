@@ -26,7 +26,7 @@ public class Client {
   }
 
   public static void main(String[] args) throws InterruptedException {
-    String target = "localhost:8980";
+    String target = "localhost:50000";
     if (args.length > 0) {
       if ("--help".equals(args[0])) {
         System.err.println("Usage: [target]");
