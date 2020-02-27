@@ -22,5 +22,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        cd java
+        cd java/common
         mvn --settings settings.xml deploy

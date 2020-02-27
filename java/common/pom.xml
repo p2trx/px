@@ -94,6 +94,7 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>0.6.1</version>
                 <configuration>
+                    <protoSourceRoot>${basedir}/../../proto</protoSourceRoot>
                     <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
@@ -136,5 +137,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub p2trx Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/p2trx/px</url>
+        </repository>
+    </distributionManagement>
 
 </project>
