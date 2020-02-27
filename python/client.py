@@ -1,6 +1,6 @@
 import grpc
-import px_pb2 as px
-from px_pb2_grpc import BrowserStub
+import px.px_pb2 as px
+from px.px_pb2_grpc import BrowserStub
 from timeit import default_timer as timer
 
 

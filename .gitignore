@@ -5,3 +5,6 @@ node_modules
 .project
 .settings/*
 **/*.iml
+.vscode
+__pycache__
+python/px/px_pb2*.py

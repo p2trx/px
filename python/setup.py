@@ -1,4 +1,12 @@
-import conda.cli as cli
+from setuptools import setup, find_packages
+import px;
 
-cli.main('conda', 'create',  '-n', 'px', '-y', 'python=3.7')
-cli.main('conda', 'install', '--file', 'requirements.txt', '-n', 'px', '-y')
+setup(
+    name='ckpx',
+    version=px.__version__,
+    packages=find_packages(),
+    install_requires=['grpcio>=1.27.2', 'grpcio-tools>=1.27.2'],
+    author='p2trx',
+    description='Modern test automation framework using GRPC protocol',
+    url='https://github.com/p2trx/px',
+)
