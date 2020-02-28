@@ -20,9 +20,20 @@ public class Client {
   }
 
   public void do_() {
-    ClickAction clickAction = ClickAction.newBuilder().setSelector("#button").build();
-    DoRequest request = DoRequest.newBuilder().addActions(Action.newBuilder().setClickAction(clickAction)).build();
-    DoResponse response = blockingStub.do_(request);
+    Action action = Action.newBuilder()
+        .setLaunchAction(LaunchAction.newBuilder().setHeadless(false).build())
+        .setGotoAction(GotoAction.newBuilder().setUrl("https://katalon-test.s3.amazonaws.com/aut/html/form.html").build())
+        .build();
+    blockingStub.do_(DoRequest.newBuilder().addActions(action).build());
+
+    action = Action.newBuilder()
+        .setTypeAction(TypeAction.newBuilder().setSelector("#first-name").setText("First Name"))
+        .setTypeAction(TypeAction.newBuilder().setSelector("#last-name").setText("Last Name"))
+        .setClickAction(ClickAction.newBuilder().setSelector("input[type=radio][name=gender]"))
+        .setClickAction(ClickAction.newBuilder().setSelector("#dob"))
+        .setClickAction(ClickAction.newBuilder().setSelector("body > div.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top > div.datepicker-days > table > tbody > tr:nth-child(1) > td:nth-child(1)"))
+        .build();
+    DoResponse response = blockingStub.do_(DoRequest.newBuilder().addActions(action).build());
   }
 
   public static void main(String[] args) throws InterruptedException {

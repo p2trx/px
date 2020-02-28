@@ -4,7 +4,7 @@ let browser
 let page
 
 const launchAction = async (headless = false) => {
-    browser = await puppeteer.launch({ headless })
+    browser = await puppeteer.launch({ headless, args: ['--no-sandbox'] })
     page = await browser.newPage()
     return page.setViewport({ width: 1024, height: 768})
 }
