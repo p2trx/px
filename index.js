@@ -1,64 +1,68 @@
-const path = require('path')
+const { join } = require('path')
 
-const grpc = require('grpc')
-const protoLoader = require('@grpc/proto-loader')
+const { loadPackageDefinition, Server, ServerCredentials } = require('grpc')
+const { loadSync } = require('@grpc/proto-loader')
 
-const Browser = require('./browser');
+const { launch, close, goToPage, click, type, select, getInnerText } = require('./browser')
 
-function doAction(call, callback) {
-    let p = new Promise(function(resolve) {
-        resolve()
+function doAction (call, callback) {
+  let p = new Promise(function (resolve) {
+    resolve()
+  })
+  const { actions } = call.request
+  actions.forEach(function (action) {
+    if (action.launchAction) {
+      p = p.then(function () {
+        const { headless = false } = action.launchAction
+        return launch(headless)
+      })
+    } else if (action.closeAction) {
+      p = p.then(function () {
+        return close()
+      })
+    } else if (action.gotoAction) {
+      p = p.then(function () {
+        const { url } = action.gotoAction
+        return goToPage(url)
+      })
+    } else if (action.clickAction) {
+      p = p.then(function () {
+        const { selector } = action.clickAction
+        return click(selector)
+      })
+    } else if (action.typeAction) {
+      p = p.then(function () {
+        const { selector, text } = action.typeAction
+        return type(selector, text)
+      })
+    } else if (action.selectAction) {
+      p = p.then(function () {
+        const { selector, values } = action.selectAction
+        return select(selector, values)
+      })
+    } else if (action.getInnerTextAction) {
+      p = p.then(function () {
+        const { selector } = action.getInnerTextAction
+        return getInnerText(selector)
+      })
+    }
+  })
+  p.then(function (result) {
+    callback(null, {
+      result
     })
-    const { actions } = call.request
-    actions.forEach(function(action) {
-        if (action.launchAction) {
-            p = p.then(function() {
-                const { headless = false } = action.launchAction
-                return Browser.launchAction(headless);
-            })
-        } else if (action.gotoAction) {
-            p = p.then(function() {
-                const { url } = action.gotoAction
-                return Browser.goToPage(url);
-            })
-        } else if (action.clickAction) {
-            p = p.then(function() {
-                const { selector } = action.clickAction
-                return Browser.click(selector)
-            })
-        } else if (action.typeAction) {
-            p = p.then(function() {
-                const { selector, text } = action.typeAction
-                return Browser.type(selector, text)
-            })
-        } else if (action.selectAction) {
-            p = p.then(function(cb) {
-                const { selector, values } = action.selectAction
-                return Browser.select(selector, values)
-            })
-        } else if (action.getInnerTextAction) {
-            p = p.then(function(cb) {
-                const { selector } = action.getInnerTextAction
-                return Browser.getInnerText(selector)
-            })
-        }
-    })
-    p.then(function(result) {
-        callback(null, {
-            result
-        })
-    })
+  })
 }
 
-function main() {
-    const PROTO_PATH = path.join(__dirname, '/px.proto')
-    const packageDefinition = protoLoader.loadSync(PROTO_PATH)
-    const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
-    const px = protoDescriptor.px
-    var server = new grpc.Server()
-    server.addService(px.Browser.service, { Do: doAction })
-    server.bind('0.0.0.0:50000', grpc.ServerCredentials.createInsecure())
-    server.start()
+function main () {
+  const PROTO_PATH = join(__dirname, '/px.proto')
+  const packageDefinition = loadSync(PROTO_PATH)
+  const protoDescriptor = loadPackageDefinition(packageDefinition)
+  const px = protoDescriptor.px
+  var server = new Server()
+  server.addService(px.Browser.service, { Do: doAction })
+  server.bind('0.0.0.0:50000', ServerCredentials.createInsecure())
+  server.start()
 }
 
 main()

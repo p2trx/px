@@ -21,6 +21,7 @@ message DoRequest {
 message Action {
     oneof action_oneof {
         LaunchAction launchAction = 1;
+        CloseAction closeAction = 7;
         GotoAction gotoAction = 2;
         ClickAction clickAction = 3;
         TypeAction typeAction = 4;
@@ -31,6 +32,9 @@ message Action {
 
 message LaunchAction {
     bool headless = 1;
+}
+
+message CloseAction {
 }
 
 message GotoAction {
