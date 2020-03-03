@@ -11,13 +11,13 @@
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#first-name",
         "text": "First Name"
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#last-name",
         "text": "Last Name"
       }
@@ -38,25 +38,25 @@
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#address",
         "text": "Address"
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#email",
         "text": "email@email.com"
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#password",
         "text": "Password"
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#company",
         "text": "Company"
       }
@@ -108,7 +108,7 @@
       }
     },
     {
-      "typeAction": {
+      "clearAndTypeAction": {
         "selector": "#comment",
         "text": "Comment"
       }
@@ -121,6 +121,11 @@
     {
       "getInnerTextAction": {
         "selector": "#submit-msg"
+      }
+    },
+    {
+      "closeAction": {
+        
       }
     }
   ]

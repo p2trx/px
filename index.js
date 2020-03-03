@@ -3,7 +3,20 @@ const { join } = require('path')
 const { loadPackageDefinition, Server, ServerCredentials } = require('grpc')
 const { loadSync } = require('@grpc/proto-loader')
 
-const { launch, close, goToPage, click, type, select, getInnerText } = require('./browser')
+const {
+  launch,
+  close,
+  goToPage,
+  click,
+  type,
+  clearAndType,
+  select,
+  getInnerText,
+  keyPress,
+  keyDown,
+  keyUp,
+  focus
+} = require('./actions')
 
 function doAction (call, callback) {
   let p = new Promise(function (resolve) {
@@ -35,6 +48,11 @@ function doAction (call, callback) {
         const { selector, text } = action.typeAction
         return type(selector, text)
       })
+    } else if (action.clearAndTypeAction) {
+      p = p.then(function () {
+        const { selector, text } = action.clearAndTypeAction
+        return clearAndType(selector, text)
+      })
     } else if (action.selectAction) {
       p = p.then(function () {
         const { selector, values } = action.selectAction
@@ -44,6 +62,26 @@ function doAction (call, callback) {
       p = p.then(function () {
         const { selector } = action.getInnerTextAction
         return getInnerText(selector)
+      })
+    } else if (action.keyPressAction) {
+      p = p.then(function () {
+        const { key } = action.keyPressAction
+        return keyPress(key)
+      })
+    } else if (action.keyDownAction) {
+      p = p.then(function () {
+        const { key } = action.keyPressAction
+        return keyDown(key)
+      })
+    } else if (action.keyUpAction) {
+      p = p.then(function () {
+        const { key } = action.keyUpAction
+        return keyUp(key)
+      })
+    } else if (action.focus) {
+      p = p.then(function () {
+        const { selector } = action.focus
+        return focus(selector)
       })
     }
   })

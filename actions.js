@@ -31,6 +31,16 @@ const type = async (selector, text) => {
   return page.type(selector, text)
 }
 
+const clearAndType = async (selector, text) => {
+  await waitForSelector(selector)
+  await page.focus(selector)
+  await page.keyboard.down('Control')
+  await page.keyboard.press('A')
+  await page.keyboard.up('Control')
+  await page.keyboard.press('Backspace')
+  return page.type(selector, text)
+}
+
 const select = async (selector, values) => {
   await waitForSelector(selector)
   return page.select(selector, ...values)
@@ -42,6 +52,22 @@ const getInnerText = async (selector) => {
   return innerText
 }
 
+const keyPress = async (key) => {
+  return page.keyboard.press(key)
+}
+
+const keyDown = async (key) => {
+  return page.keyboard.down(key)
+}
+
+const keyUp = async (key) => {
+  return page.keyboard.up(key)
+}
+
+const focus = async (selector) => {
+  return page.focus(selector)
+}
+
 module.exports = {
   launch,
   close,
@@ -49,6 +75,11 @@ module.exports = {
   waitForSelector,
   click,
   type,
+  clearAndType,
   select,
-  getInnerText
+  getInnerText,
+  keyPress,
+  keyUp,
+  keyDown,
+  focus
 }
