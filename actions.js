@@ -1,78 +1,70 @@
-const puppeteer = require('puppeteer')
-
-let browser
-let page
+const browser = require('./browser')
 
 const launch = async (headless = false) => {
-  browser = await puppeteer.launch({ headless })
-  page = await browser.newPage()
-  return page.setViewport({ width: 1024, height: 768 })
+  await browser.launch(headless)
+  return browser.startTracing()
 }
 
-const close = () => {
-  return browser.close()
+const close = async () => {
+  await browser.close()
+  return browser.stopTracing('trace.json')
 }
 
-const goToPage = (url) => {
-  return page.goto(url)
+const goto = url => {
+  return browser.goto(url)
 }
 
-const click = (selector) => {
-  waitForSelector(selector)
-  return page.click(selector)
-}
-
-const waitForSelector = async (selector) => {
-  return page.waitForSelector(selector)
+const click = async selector => {
+  await browser.waitForSelector(selector)
+  return browser.click(selector)
 }
 
 const type = async (selector, text) => {
-  await waitForSelector(selector)
-  return page.type(selector, text)
+  await browser.waitForSelector(selector)
+  return browser.type(selector, text)
 }
 
 const clearAndType = async (selector, text) => {
-  await waitForSelector(selector)
-  await page.focus(selector)
-  await page.keyboard.down('Control')
-  await page.keyboard.press('A')
-  await page.keyboard.up('Control')
-  await page.keyboard.press('Backspace')
-  return page.type(selector, text)
+  await browser.waitForSelector(selector)
+  await browser.focus(selector)
+  await browser.keydown('Control')
+  await browser.keypress('A')
+  await browser.keyup('Control')
+  await browser.keypress('Backspace')
+  return browser.type(selector, text)
 }
 
 const select = async (selector, values) => {
-  await waitForSelector(selector)
-  return page.select(selector, ...values)
+  await browser.waitForSelector(selector)
+  return browser.select(selector, values)
 }
 
-const getInnerText = async (selector) => {
-  const element = await waitForSelector(selector)
-  const innerText = await element.evaluate(e => e.innerText)
+const getInnerText = async selector => {
+  await browser.waitForSelector(selector)
+  const innerText = await browser.getInnerText(selector)
   return innerText
 }
 
-const keyPress = async (key) => {
-  return page.keyboard.press(key)
+const keyPress = key => {
+  return browser.keypress(key)
 }
 
-const keyDown = async (key) => {
-  return page.keyboard.down(key)
+const keyDown = key => {
+  return browser.keydown(key)
 }
 
-const keyUp = async (key) => {
-  return page.keyboard.up(key)
+const keyUp = key => {
+  return browser.keyup(key)
 }
 
-const focus = async (selector) => {
-  return page.focus(selector)
+const focus = async selector => {
+  return browser.focus(selector)
 }
 
 module.exports = {
   launch,
   close,
-  goToPage,
-  waitForSelector,
+  goto,
   click,
   type,
   clearAndType,
