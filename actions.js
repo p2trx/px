@@ -2,12 +2,12 @@ const browser = require('./browser')
 
 const launch = async (headless = false) => {
   await browser.launch(headless)
-  return browser.startTracing()
+  return browser.startTracing('trace.json')
 }
 
 const close = async () => {
-  await browser.close()
-  return browser.stopTracing('trace.json')
+  await browser.stopTracing()
+  return browser.close()
 }
 
 const goto = url => {

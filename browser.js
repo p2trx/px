@@ -4,7 +4,7 @@ let browser
 let page
 
 const startTracing = path => {
-  return page.tracing.start({ path })
+  return page.tracing.start({ screenshots: true, path })
 }
 
 const stopTracing = () => {
