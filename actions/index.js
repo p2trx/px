@@ -1,6 +1,6 @@
-const browser = require('./browser')
+const browser = require('../browser')
 
-const launch = async (headless = false) => {
+const launch = async ({ headless = false }) => {
   await browser.launch(headless)
   return browser.startTracing('trace.json')
 }
@@ -10,21 +10,21 @@ const close = async () => {
   return browser.close()
 }
 
-const goto = url => {
+const goto = ({ url }) => {
   return browser.goto(url)
 }
 
-const click = async selector => {
+const click = async ({ selector }) => {
   await browser.waitForSelector(selector)
   return browser.click(selector)
 }
 
-const type = async (selector, text) => {
+const type = async ({ selector, text }) => {
   await browser.waitForSelector(selector)
   return browser.type(selector, text)
 }
 
-const clearAndType = async (selector, text) => {
+const clearAndType = async ({ selector, text }) => {
   await browser.waitForSelector(selector)
   await browser.focus(selector)
   await browser.keydown('Control')
@@ -34,44 +34,44 @@ const clearAndType = async (selector, text) => {
   return browser.type(selector, text)
 }
 
-const select = async (selector, values) => {
+const select = async ({ selector, values }) => {
   await browser.waitForSelector(selector)
   return browser.select(selector, values)
 }
 
-const getInnerText = async selector => {
+const getInnerText = async ({ selector }) => {
   await browser.waitForSelector(selector)
   const innerText = await browser.getInnerText(selector)
   return innerText
 }
 
-const keyPress = key => {
+const keyPress = ({ key }) => {
   return browser.keypress(key)
 }
 
-const keyDown = key => {
+const keyDown = ({ key }) => {
   return browser.keydown(key)
 }
 
-const keyUp = key => {
+const keyUp = ({ key }) => {
   return browser.keyup(key)
 }
 
-const focus = async selector => {
+const focus = async ({ selector }) => {
   return browser.focus(selector)
 }
 
 module.exports = {
-  launch,
-  close,
-  goto,
-  click,
-  type,
   clearAndType,
-  select,
+  click,
+  close,
+  focus,
   getInnerText,
+  goto,
+  keyDown,
   keyPress,
   keyUp,
-  keyDown,
-  focus
+  launch,
+  select,
+  type
 }

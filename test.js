@@ -152,7 +152,8 @@ function doActions(client) {
     }
   ]
   const actions = []
-  for (var i = 0; i < 50; i++) {
+  const loopTimes = 1
+  for (var i = 0; i < loopTimes; i++) {
     actions.push(...scenario)
   }
   client.do({ actions }, function(err, response) {
