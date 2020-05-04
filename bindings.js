@@ -25,7 +25,6 @@ function invoke(call, callback) {
         return null
       }
       const actionArguments = actionPayload[actionProperty] || {}
-      console.log(actionArguments)
       return action.call(this, actionArguments)
     })
   })
