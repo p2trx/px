@@ -1,13 +1,15 @@
 const browser = require('./browser')
-const mouse = require('./mouse')
-const keyboard = require('./keyboard')
-const getters = require('./getters')
 const form = require('./form')
+const getters = require('./getters')
+const keyboard = require('./keyboard')
+const mouse = require('./mouse')
+const utils = require('./utils')
 
 module.exports = {
   ...browser,
-  ...mouse,
-  ...keyboard,
+  ...form,
   ...getters,
-  ...form
+  ...keyboard,
+  ...mouse,
+  ...utils
 }

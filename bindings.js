@@ -4,7 +4,7 @@ const actionPropertySuffix = 'Action'
 
 const actionPropertySuffixLength = actionPropertySuffix.length
 
-function invoke(call, callback) {
+const invoke = (call, callback) => {
   let p = new Promise(function(resolve) {
     resolve()
   })

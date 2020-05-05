@@ -8,6 +8,12 @@ const waitForSelector = selector => {
   return page.waitForSelector(selector)
 }
 
+const takeScreenshot = async (path, fullPage) => {
+  const { page } = global
+  await page.screenshot({ path, fullPage })
+}
+
 module.exports = {
+  takeScreenshot,
   waitForSelector
 }

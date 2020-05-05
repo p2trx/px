@@ -149,6 +149,12 @@ function doActions(client) {
       getInnerTextAction: {
         selector: '#submit-msg'
       }
+    },
+    {
+      takeScreenshotAction: {
+        path: 'screenshot.png',
+        fullPage: true
+      }
     }
   ]
   const actions = []
