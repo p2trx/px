@@ -1,12 +1,10 @@
 const driver = require('../driver')
 
-const launch = async ({ headless = false }) => {
-  await driver.launch(headless)
-  return driver.startTracing('trace.json')
+const launch = ({ headless = false }) => {
+  return driver.launch(headless)
 }
 
-const close = async () => {
-  await driver.stopTracing()
+const close = () => {
   return driver.close()
 }
 

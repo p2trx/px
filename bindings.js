@@ -13,6 +13,7 @@ const invoke = (call, callback) => {
       const actionProperty = Object.keys(actionPayload).find(key =>
         key.endsWith(actionPropertySuffix)
       )
+      console.log(`Received ${actionProperty}`)
       if (!actionProperty) {
         return null
       }

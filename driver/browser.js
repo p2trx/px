@@ -23,21 +23,9 @@ const focus = selector => {
   return page.focus(selector)
 }
 
-const startTracing = path => {
-  const { page } = global
-  return page.tracing.start({ screenshots: true, path })
-}
-
-const stopTracing = () => {
-  const { page } = global
-  return page.tracing.stop()
-}
-
 module.exports = {
   close,
   focus,
   goto,
-  launch,
-  startTracing,
-  stopTracing
+  launch
 }

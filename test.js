@@ -41,6 +41,11 @@ function doActions(client) {
       }
     },
     {
+      startTracingAction: {
+        path: 'trace.json'
+      }
+    },
+    {
       typeAction: {
         selector: '#first-name',
         text: 'First Name'
@@ -156,6 +161,9 @@ function doActions(client) {
         fullPage: true
       }
     }
+    // {
+    //   stopTracingAction: {}
+    // }
   ]
   const actions = []
   const loopTimes = 1
