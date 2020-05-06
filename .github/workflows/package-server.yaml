@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [10.x]
 
     steps:
@@ -41,14 +41,14 @@ jobs:
           npm run build
           echo "::set-env name=BUILD_VERSION::$(node -p "require('./package').version")"
 
-      - name: Draft new release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v1
-        if: success()
-        with:
-          name: px-server-${{ runner.os }}-${{ env.BUILD_VERSION }}
-          path: dist
+#      - name: Draft new release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: npm run release
+#
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v1
+#        if: success()
+#        with:
+#          name: px-server-${{ runner.os }}-${{ env.BUILD_VERSION }}
+#          path: dist
