@@ -3,7 +3,9 @@ const form = require('./form')
 const getters = require('./getters')
 const keyboard = require('./keyboard')
 const mouse = require('./mouse')
-const utils = require('./utils')
+const screenshot = require('./screenshot')
+const trace = require('./trace')
+const wait = require('./wait')
 
 module.exports = {
   ...browser,
@@ -11,5 +13,7 @@ module.exports = {
   ...getters,
   ...keyboard,
   ...mouse,
-  ...utils
+  ...screenshot,
+  ...trace,
+  ...wait
 }
