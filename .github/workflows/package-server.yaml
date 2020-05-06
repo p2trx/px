@@ -42,9 +42,9 @@ jobs:
           echo "::set-env name=BUILD_VERSION::$(node -p "require('./package').version")"
 
       - name: Draft new release
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
