@@ -5,6 +5,7 @@ const keyboard = require('./keyboard')
 const mouse = require('./mouse')
 const screenshot = require('./screenshot')
 const trace = require('./trace')
+const wait = require('./wait')
 
 module.exports = {
   ...browser,
@@ -13,5 +14,6 @@ module.exports = {
   ...keyboard,
   ...mouse,
   ...screenshot,
-  ...trace
+  ...trace,
+  ...wait
 }

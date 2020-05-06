@@ -13,7 +13,6 @@ const invoke = (call, callback) => {
       const actionProperty = Object.keys(actionPayload).find(key =>
         key.endsWith(actionPropertySuffix)
       )
-      console.log(`Received ${actionProperty}`)
       if (!actionProperty) {
         return null
       }
@@ -26,6 +25,7 @@ const invoke = (call, callback) => {
         return null
       }
       const actionArguments = actionPayload[actionProperty] || {}
+      console.log(actionPayload)
       return action.call(this, actionArguments)
     })
   })
