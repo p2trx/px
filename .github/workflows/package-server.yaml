@@ -48,7 +48,7 @@ jobs:
           name: px-server-${{ runner.os }}-${{ env.BUILD_VERSION }}
           path: dist
 
-#      - name: Draft new release
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: npm run release
+      - name: Draft new release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release

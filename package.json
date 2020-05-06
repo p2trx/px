@@ -31,7 +31,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.2",
     "pkg": "^4.4.8",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "release-it": "^13.5.8"
   },
   "pkg": {
     "assets": "px.proto"
