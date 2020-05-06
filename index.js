@@ -18,7 +18,7 @@ function main() {
         server.bind('0.0.0.0:50000', ServerCredentials.createInsecure())
         console.log("Starting PX server...")
         server.start()
-        console.log("PX server is running on port 5000")
+        console.log("PX server is running on port 50000")
     })
     .catch(error => {
         console.log('Fail to start PX browser', error)
