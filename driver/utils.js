@@ -1,21 +1,21 @@
-const startTracing = async (path, screenshots) => {
+const startTracing = (path, screenshots) => {
   const { page } = global
-  await page.tracing.start({ screenshots, path })
+  return page.tracing.start({ screenshots, path })
 }
 
 const stopTracing = async () => {
   const { page } = global
-  await page.tracing.stop()
+  return page.tracing.stop()
 }
 
-const takeScreenshot = async (path, fullPage) => {
+const takeScreenshot = (path, fullPage) => {
   const { page } = global
-  await page.screenshot({ path, fullPage })
+  return page.screenshot({ path, fullPage })
 }
 
-const waitForSelector = async selector => {
+const waitForSelector = selector => {
   const { page } = global
-  await page.waitForSelector(selector)
+  return page.waitForSelector(selector)
 }
 
 module.exports = {
