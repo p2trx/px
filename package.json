@@ -36,6 +36,6 @@
     "release-it": "^13.5.8"
   },
   "pkg": {
-    "assets": "px.proto",
+    "assets": "px.proto"
   }
 }
