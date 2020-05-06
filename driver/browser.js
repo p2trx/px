@@ -23,7 +23,8 @@ const getExecutablePath = () => {
 }
 
 const getBrowserFolder = () => {
-  return path.join(path.dirname(process.execPath), '.local-chromium');
+  // return path.join(path.dirname(process.execPath), '.local-chromium');
+  return path.join(require('os').homedir(), '.local-chromium');
 }
 
 const close = () => {
