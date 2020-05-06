@@ -6,7 +6,9 @@
   "bin": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist && cp -r node_modules/puppeteer/.local-chromium ./dist/puppeteer",
+    "prebuild": "rm -rf dist",
+    "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist",
+    "postbuild": "cp -R ./node_modules/puppeteer/.local-chromium ./dist/chromium && chmod 755 ./dist/chromium",
     "lint": "eslint **/**.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +17,7 @@
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "grpc": "^1.24.2",
+    "path": "^0.12.7",
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
