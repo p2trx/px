@@ -6,7 +6,7 @@ const protoLoader = require('@grpc/proto-loader')
 main()
 
 function main() {
-  const PROTO_PATH = path.join(__dirname, '/px.proto')
+  const PROTO_PATH = path.join(__dirname, '../px.proto')
   const packageDefinition = protoLoader.loadSync(PROTO_PATH)
   const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
   const px = protoDescriptor.px
@@ -42,7 +42,7 @@ function doActions(client) {
     },
     {
       startTracingAction: {
-        path: 'trace.json'
+        path: 'test/trace.json'
       }
     },
     {
@@ -157,13 +157,16 @@ function doActions(client) {
     },
     {
       takeScreenshotAction: {
-        path: 'screenshot.png',
+        path: 'test/screenshot.png',
         fullPage: true
       }
+    },
+    {
+      stopTracingAction: {}
+    },
+    {
+      closeAction: {}
     }
-    // {
-    //   stopTracingAction: {}
-    // }
   ]
   const actions = []
   const loopTimes = 1

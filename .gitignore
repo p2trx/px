@@ -9,5 +9,7 @@ node_modules
 __pycache__
 java/proto-gen-mac
 python/px/px_pb2*.py
-trace.json
+
+test/screenshot.png
+test/trace.json
 dist/*
