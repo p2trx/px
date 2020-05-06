@@ -10,7 +10,8 @@
     "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist",
     "postbuild": "cp -R ./node_modules/puppeteer/.local-chromium ./dist/chromium && chmod 755 ./dist/chromium",
     "lint": "eslint **/**.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it --ci"
   },
   "author": "",
   "license": "ISC",
