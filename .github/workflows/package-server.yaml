@@ -11,12 +11,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node-version:
-          - 10.x
+        os: [ubuntu-latest, windows-latest]
+        node-version: [10.x]
 
     steps:
       - name: Checkout code
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v1
         if: success()
         with:
-          name: px-server-${{ env.BUILD_VERSION }}
+          name: px-server-${{ runner.os }}-${{ env.BUILD_VERSION }}
           path: dist
 
 #      - name: Draft new release
