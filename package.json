@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist && cp -r node_modules/puppeteer/.local-chromium ./dist/puppeteer",
     "lint": "eslint **/**.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +27,10 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+    "pkg": "^4.4.8",
+    "prettier": "^1.19.1",
+  },
+  "pkg": {
+    "assets": "px.proto"
   }
 }

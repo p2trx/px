@@ -13,7 +13,9 @@ function main() {
   var server = new Server()
   server.addService(px.Browser.service, { Do: invoke })
   server.bind('0.0.0.0:50000', ServerCredentials.createInsecure())
+  console.log("Starting PX server...")
   server.start()
+  console.log("PX server is running on port 5000")
 }
 
 main()
