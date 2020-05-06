@@ -46,6 +46,11 @@ function doActions(client) {
       }
     },
     {
+      waitAction: {
+        time: 2000
+      }
+    },
+    {
       typeAction: {
         selector: '#first-name',
         text: 'First Name'
@@ -55,6 +60,12 @@ function doActions(client) {
       typeAction: {
         selector: '#last-name',
         text: 'Last Name'
+      }
+    },
+    {
+      clickAction: {
+        selector: 'input[type=radio][name=gender]',
+        button: 'right'
       }
     },
     {

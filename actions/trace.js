@@ -8,12 +8,7 @@ const stopTracing = () => {
   return driver.stopTracing()
 }
 
-const takeScreenshot = ({ path, fullPage = true }) => {
-  return driver.takeScreenshot(path, fullPage)
-}
-
 module.exports = {
   startTracing,
-  stopTracing,
-  takeScreenshot
+  stopTracing
 }

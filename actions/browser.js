@@ -1,6 +1,6 @@
 const driver = require('../driver')
 
-const launch = ({ headless = false }) => {
+const launch = ({ headless }) => {
   return driver.launch(headless)
 }
 
