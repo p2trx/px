@@ -8,6 +8,7 @@
     "start": "nodemon --ignore 'test/*.*' index.js",
     "prebuild": "rm -rf dist",
     "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist",
+    "postbuild": "cp -r ./node_modules/grpc/src/node/extension_binary/**/* ./dist",
     "lint": "eslint **/**.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it --ci"
@@ -35,6 +36,6 @@
     "release-it": "^13.5.8"
   },
   "pkg": {
-    "assets": "px.proto"
+    "assets": "px.proto",
   }
 }
