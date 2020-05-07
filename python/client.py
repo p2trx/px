@@ -7,29 +7,26 @@ def launch():
     return px.Action(launchAction=px.LaunchAction(headless=False))
 
 def goto(url):
-    return px.Action(gotoAction=px.GotoAction(
-        url=url))
+    return px.Action(gotoAction=px.GotoAction(url=url))
+
+def type(selector, text):
+    return px.Action(typeAction=px.TypeAction(selector=selector, text=text))
+
+def click(selector):
+    return px.Action(clickAction=px.ClickAction(selector=selector))
 
 def doActions(stub):
     start = timer()
     actions = [
-        px.Action(typeAction=px.TypeAction(
-            selector='#first-name', text='First Name')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#last-name', text='Last Name')),
-        px.Action(clickAction=px.ClickAction(
-            selector='input[type=radio][name=gender]')),
-        px.Action(clickAction=px.ClickAction(selector='#dob')),
-        px.Action(clickAction=px.ClickAction(
-            selector='body > div.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top > div.datepicker-days > table > tbody > tr:nth-child(1) > td:nth-child(1)')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#address', text='Address')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#email', text='email@email.com')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#password', text='Password')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#company', text='Company')),
+        type(selector='#first-name', text='First Name'),
+        type(selector='#last-name', text='Last Name'),
+        click(selector='input[type=radio][name=gender]'),
+        click(selector='#dob'),
+        click(selector='body > div.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top > div.datepicker-days > table > tbody > tr:nth-child(1) > td:nth-child(1)'),
+        type(selector='#address', text='Address'),
+        type(selector='#email', text='email@email.com'),
+        type(selector='#password', text='Password'),
+        type(selector='#company', text='Company'),
         px.Action(selectAction=px.SelectAction(
             selector='#role', values=['Manager'])),
         px.Action(selectAction=px.SelectAction(
