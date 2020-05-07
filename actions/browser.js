@@ -16,9 +16,14 @@ const focus = async ({ selector }) => {
   return driver.focus(selector)
 }
 
+const reload = () => {
+  return driver.reload()
+}
+
 module.exports = {
   close,
   focus,
   goto,
-  launch
+  launch,
+  reload
 }

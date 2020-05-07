@@ -6,6 +6,12 @@ const getInnerText = async ({ selector }) => {
   return innerText
 }
 
+const evaluate = async ({ evaluateFunction }) => {
+  const result = await driver.evaluate(evaluateFunction)
+  return result
+}
+
 module.exports = {
-  getInnerText
+  getInnerText,
+  evaluate
 }

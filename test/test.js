@@ -62,12 +62,12 @@ function doActions(client) {
         text: 'Last Name'
       }
     },
-    {
-      clickAction: {
-        selector: 'input[type=radio][name=gender]',
-        button: 'right'
-      }
-    },
+    // {
+    //   clickAction: {
+    //     selector: 'input[type=radio][name=gender]',
+    //     button: 'right'
+    //   }
+    // },
     {
       clickAction: {
         selector: 'input[type=radio][name=gender]'
@@ -211,6 +211,19 @@ function doActions(client) {
       takeScreenshotAction: {
         path: 'test/screenshoot/double_click.png',
         fullPage: true
+      }
+    },
+    {
+      gotoAction: {
+        url: 'https://www.youtube.com/watch?v=T5GSLc-i5Xo'
+      }
+    },
+    {
+      reloadAction: {}
+    },
+    {
+      evaluateAction: {
+        evaluateFunction: 'window.scrollTo(0, 1000000)'
       }
     },
     {

@@ -23,9 +23,15 @@ const focus = selector => {
   return page.focus(selector)
 }
 
+const reload = () => {
+  const { page } = global
+  return page.reload()
+}
+
 module.exports = {
   close,
   focus,
   goto,
-  launch
+  launch,
+  reload
 }
