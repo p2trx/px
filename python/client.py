@@ -15,6 +15,12 @@ def type(selector, text):
 def click(selector):
     return px.Action(clickAction=px.ClickAction(selector=selector))
 
+def select(selector, values):
+    return px.Action(selectAction=px.SelectAction(selector=selector, values=values))
+
+def get_text(selector):
+    return px.Action(getInnerTextAction=px.GetInnerTextAction(selector=selector))
+
 def doActions(stub):
     start = timer()
     actions = [
@@ -27,27 +33,17 @@ def doActions(stub):
         type(selector='#email', text='email@email.com'),
         type(selector='#password', text='Password'),
         type(selector='#company', text='Company'),
-        px.Action(selectAction=px.SelectAction(
-            selector='#role', values=['Manager'])),
-        px.Action(selectAction=px.SelectAction(
-            selector='#expectation', values=['High salary'])),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(1) input')),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(2) input')),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(3) input')),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(4) input')),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(5) input')),
-        px.Action(clickAction=px.ClickAction(
-            selector='.development-ways .checkbox:nth-child(6) input')),
-        px.Action(typeAction=px.TypeAction(
-            selector='#comment', text='Comment')),
-        px.Action(clickAction=px.ClickAction(selector='#submit')),
-        px.Action(getInnerTextAction=px.GetInnerTextAction(
-            selector='#submit-msg')),
+        select(selector='#role', values=['Manager']),
+        select(selector='#expectation', values=['High salary']),
+        click(selector='.development-ways .checkbox:nth-child(1) input'),
+        click(selector='.development-ways .checkbox:nth-child(2) input'),
+        click(selector='.development-ways .checkbox:nth-child(3) input'),
+        click(selector='.development-ways .checkbox:nth-child(4) input'),
+        click(selector='.development-ways .checkbox:nth-child(5) input'),
+        click(selector='.development-ways .checkbox:nth-child(6) input'),
+        type(selector='#comment', text='Comment'),
+        click(selector='#submit'),
+        get_text(selector='#submit-msg'),
     ]
     request = px.DoRequest(actions=actions)
     stub.Do(request)
