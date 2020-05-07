@@ -32,7 +32,7 @@ message Action {
 }
 
 message ClearAndTypeAction { string selector = 1; string text = 2; }
-message ClickAction { string selector = 1; string button = 2; }
+message ClickAction { string selector = 1; string button = 2; int32 clickCount = 3; }
 message CloseAction { }
 message DoRequest { repeated Action actions = 1; }
 message DoResponse { string result = 1; }
