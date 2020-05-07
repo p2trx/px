@@ -1,6 +1,10 @@
-const click = (selector, button) => {
+const click = (selector, button, clickCount) => {
   const { page } = global
-  return page.click(selector, button)
+  const options = {
+    button,
+    clickCount
+  }
+  return page.click(selector, options)
 }
 
 module.exports = {

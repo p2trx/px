@@ -168,7 +168,48 @@ function doActions(client) {
     },
     {
       takeScreenshotAction: {
-        path: 'test/screenshot.png',
+        path: 'test/screenshoot/screenshot.png',
+        fullPage: true
+      }
+    },
+    // Test double click
+    {
+      gotoAction: {
+        url: 'https://unixpapa.com/js/testmouse.html'
+      }
+    },
+    {
+      waitAction: {
+        time: 2000
+      }
+    },
+    // double click
+    {
+      clickAction: {
+        selector: 'body > table > tbody > tr > td > a:nth-child(1)',
+        button: 'left',
+        clickCount: 2
+      }
+    },
+    // left click
+    {
+      clickAction: {
+        selector: 'body > table > tbody > tr > td > a:nth-child(1)',
+        button: 'left',
+        clickCount: 1
+      }
+    },
+    // right click
+    {
+      clickAction: {
+        selector: 'body > table > tbody > tr > td > a:nth-child(1)',
+        button: 'right',
+        clickCount: 1
+      }
+    },
+    {
+      takeScreenshotAction: {
+        path: 'test/screenshoot/double_click.png',
         fullPage: true
       }
     },
