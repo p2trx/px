@@ -2,49 +2,48 @@ import grpc
 import px.px_pb2 as px
 from px.px_pb2_grpc import BrowserStub
 
-latest_stub = None
+class Client:
 
-debug = False
+    channel = None
 
-def launch(stub=None):
-    action = px.Action(launchAction=px.LaunchAction(headless=False))
-    do_request(stub=stub, actions=[action])
+    stub = None
 
+    debug = False
 
-def goto(url, stub=None):
-    actions = px.Action(gotoAction=px.GotoAction(url=url))
-    do_request(stub=stub, actions=[actions])
+    def __init__(self, url, debug=False):
+        self.channel = grpc.insecure_channel(url)
+        self.stub = BrowserStub(self.channel)
+        self.debug = debug
 
-
-def type(selector, text, stub=None):
-    actions = px.Action(typeAction=px.TypeAction(selector=selector, text=text))
-    do_request(stub=stub, actions=[actions])
-
-
-def click(selector, stub=None):
-    actions = px.Action(clickAction=px.ClickAction(selector=selector))
-    do_request(stub=stub, actions=[actions])
+    def launch(self):
+        action = px.Action(launchAction=px.LaunchAction(headless=False))
+        self.do_request(actions=[action])
 
 
-def select(selector, values, stub=None):
-    actions = px.Action(selectAction=px.SelectAction(selector=selector, values=values))
-    do_request(stub=stub, actions=[actions])
+    def goto(self, url):
+        actions = px.Action(gotoAction=px.GotoAction(url=url))
+        self.do_request(actions=[actions])
 
 
-def get_text(selector, stub=None):
-    actions = px.Action(getInnerTextAction=px.GetInnerTextAction(selector=selector))
-    do_request(stub=stub, actions=[actions])
+    def type(self, selector, text):
+        actions = px.Action(typeAction=px.TypeAction(selector=selector, text=text))
+        self.do_request(actions=[actions])
 
-def do_request(actions, stub=None):
-    global latest_stub
-    if stub is None:
-        stub = latest_stub
-    request = px.DoRequest(actions=actions)
-    stub.Do(request)
 
-def setup(url):
-    global latest_stub
-    channel = grpc.insecure_channel(url)
-    stub = BrowserStub(channel)
-    latest_stub = stub
-    return stub
+    def click(self, selector):
+        actions = px.Action(clickAction=px.ClickAction(selector=selector))
+        self.do_request(actions=[actions])
+
+
+    def select(self, selector, values):
+        actions = px.Action(selectAction=px.SelectAction(selector=selector, values=values))
+        self.do_request(actions=[actions])
+
+
+    def get_text(self, selector):
+        actions = px.Action(getInnerTextAction=px.GetInnerTextAction(selector=selector))
+        self.do_request(actions=[actions])
+
+    def do_request(self, actions):
+        request = px.DoRequest(actions=actions)
+        self.stub.Do(request)

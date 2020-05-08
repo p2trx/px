@@ -1,6 +1,7 @@
 from timeit import default_timer as timer
-import client as px
+from client import Client
 
+px = None
 
 def doActions():
     start = timer()
@@ -38,10 +39,8 @@ def do():
 
 
 def run():
-    start = timer()
-    px.setup(url='localhost:50000')
-    elapsed = timer() - start
-    print('Setup Elapsed: {:.3f}s'.format(elapsed))
+    global px
+    px = Client('localhost:50000')
     do()
 
 
