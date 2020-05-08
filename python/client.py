@@ -15,6 +15,10 @@ class Client:
         self.stub = BrowserStub(self.channel)
         self.debug = debug
 
+    def __del__(self):
+        self.channel.close()
+        print('Channel closed')
+
     def launch(self):
         action = px.Action(launchAction=px.LaunchAction(headless=False))
         self.do_request(actions=[action])
