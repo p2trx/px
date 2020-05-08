@@ -48,6 +48,3 @@ def setup(url):
     stub = BrowserStub(channel)
     latest_stub = stub
     return stub
-    # with grpc.insecure_channel(url) as channel:
-    #     latest_stub = BrowserStub(channel)
-    #     return latest_stub
