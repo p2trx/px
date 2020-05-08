@@ -12,3 +12,6 @@ python/px/px_pb2*.py
 
 test/screenshot.png
 test/trace.json
+
+python/py/px*
+dist
