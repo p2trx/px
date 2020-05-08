@@ -38,7 +38,10 @@ def do():
 
 
 def run():
+    start = timer()
     px.setup(url='localhost:50000')
+    elapsed = timer() - start
+    print('Elapsed: {:.3f}s'.format(elapsed))
     do()
 
 
