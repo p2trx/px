@@ -1,9 +1,7 @@
 from timeit import default_timer as timer
 from client import Client
 
-px = None
-
-def doActions():
+def doActions(px):
     start = timer()
     px.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
     px.type(selector='#first-name', text='First Name'),
@@ -30,18 +28,17 @@ def doActions():
     print('Elapsed: {:.3f}s'.format(elapsed))
 
 
-def do():
+def do(px):
     start = timer()
     px.launch(),
     elapsed = timer() - start
     print('Launch browser Elapsed: {:.3f}s'.format(elapsed))
-    doActions()
+    doActions(px)
 
 
 def run():
-    global px
     px = Client('localhost:50000')
-    do()
+    do(px)
 
 
 if __name__ == "__main__":
