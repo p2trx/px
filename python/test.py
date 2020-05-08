@@ -2,31 +2,32 @@ import grpc
 import px.px_pb2 as px
 from px.px_pb2_grpc import BrowserStub
 from timeit import default_timer as timer
-import client
+import action
+
 
 def doActions(stub):
     start = timer()
     actions = [
-        client.type(selector='#first-name', text='First Name'),
-        client.type(selector='#last-name', text='Last Name'),
-        client.click(selector='input[type=radio][name=gender]'),
-        client.click(selector='#dob'),
-        client.click(selector='body > div.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top > div.datepicker-days > table > tbody > tr:nth-child(1) > td:nth-child(1)'),
-        client.type(selector='#address', text='Address'),
-        client.type(selector='#email', text='email@email.com'),
-        client.type(selector='#password', text='Password'),
-        client.type(selector='#company', text='Company'),
-        client.select(selector='#role', values=['Manager']),
-        client.select(selector='#expectation', values=['High salary']),
-        client.click(selector='.development-ways .checkbox:nth-child(1) input'),
-        client.click(selector='.development-ways .checkbox:nth-child(2) input'),
-        client.click(selector='.development-ways .checkbox:nth-child(3) input'),
-        client.click(selector='.development-ways .checkbox:nth-child(4) input'),
-        client.click(selector='.development-ways .checkbox:nth-child(5) input'),
-        client.click(selector='.development-ways .checkbox:nth-child(6) input'),
-        client.type(selector='#comment', text='Comment'),
-        client.click(selector='#submit'),
-        client.get_text(selector='#submit-msg'),
+        action.type(selector='#first-name', text='First Name'),
+        action.type(selector='#last-name', text='Last Name'),
+        action.click(selector='input[type=radio][name=gender]'),
+        action.click(selector='#dob'),
+        action.click(selector='body > div.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top > div.datepicker-days > table > tbody > tr:nth-child(1) > td:nth-child(1)'),
+        action.type(selector='#address', text='Address'),
+        action.type(selector='#email', text='email@email.com'),
+        action.type(selector='#password', text='Password'),
+        action.type(selector='#company', text='Company'),
+        action.select(selector='#role', values=['Manager']),
+        action.select(selector='#expectation', values=['High salary']),
+        action.click(selector='.development-ways .checkbox:nth-child(1) input'),
+        action.click(selector='.development-ways .checkbox:nth-child(2) input'),
+        action.click(selector='.development-ways .checkbox:nth-child(3) input'),
+        action.click(selector='.development-ways .checkbox:nth-child(4) input'),
+        action.click(selector='.development-ways .checkbox:nth-child(5) input'),
+        action.click(selector='.development-ways .checkbox:nth-child(6) input'),
+        action.type(selector='#comment', text='Comment'),
+        action.click(selector='#submit'),
+        action.get_text(selector='#submit-msg'),
     ]
     request = px.DoRequest(actions=actions)
     stub.Do(request)
@@ -36,8 +37,8 @@ def doActions(stub):
 
 def do(stub):
     actions = [
-        client.launch(),
-        client.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
+        action.launch(),
+        action.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
     ]
     request = px.DoRequest(actions=actions)
     stub.Do(request)
