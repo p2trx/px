@@ -1,7 +1,7 @@
 const driver = require('../driver')
 
-const launch = ({ headless }) => {
-  return driver.launch(headless)
+const launch = ({ headless, args }) => {
+  return driver.launch(headless, args)
 }
 
 const close = () => {
@@ -20,10 +20,35 @@ const reload = () => {
   return driver.reload()
 }
 
+const setViewport = ({ width, height }) => {
+  return driver.setViewport(width, height)
+}
+
+const emulate = ({ device }) => {
+  return driver.emulate(device)
+}
+
+const emulateMediaType = async ({ type }) => {
+  return driver.emulateMediaType(type)
+}
+
+const setCookie = async ({ cookie }) => {
+  return driver.setCookie(cookie)
+}
+
+const cookies = async () => {
+  return driver.cookies()
+}
+
 module.exports = {
   close,
   focus,
   goto,
   launch,
-  reload
+  reload,
+  setViewport,
+  emulate,
+  emulateMediaType,
+  setCookie,
+  cookies
 }

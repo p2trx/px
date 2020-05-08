@@ -6,6 +6,8 @@ const screenshot = require('./screenshot')
 const trace = require('./trace')
 const wait = require('./wait')
 const evaluate = require('./evaluate')
+const mobile = require('./mobile')
+const pdf = require('./pdf')
 
 module.exports = {
   ...browser,
@@ -15,5 +17,7 @@ module.exports = {
   ...screenshot,
   ...trace,
   ...wait,
-  ...evaluate
+  ...evaluate,
+  ...mobile,
+  ...pdf
 }

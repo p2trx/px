@@ -30,6 +30,19 @@ message Action {
         WaitAction waitAction = 16;
         EvaluateAction evaluateAction = 17;
         ReloadAction reloadAction = 18;
+        SetViewportAction setViewportAction = 19;
+
+        //mobile
+        EmulateAction emulateAction = 20;
+        TapAction tapAction = 21;
+
+        PdfAction pdfAction = 22;
+        EmulateMediaTypeAction emulateMediaTypeAction = 23;
+
+        // Cookie
+        CookiesAction cookiesAction = 24;
+        SetCookieAction setCookieAction = 25;
+        DeleteCookieAction deleteCookieAction = 26;
     }
 }
 
@@ -44,7 +57,7 @@ message GotoAction { string url = 1; } // https://www.google.com
 message KeyDownAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyPressAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyUpAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
-message LaunchAction { bool headless = 1; }
+message LaunchAction { bool headless = 1; string args = 2; }
 message SelectAction { string selector = 1; repeated string values = 2; }
 message TakeScreenshotAction { string path = 1; bool fullPage = 2; }
 message StartTracingAction { string path = 1; bool screenshots = 2; }
@@ -53,3 +66,17 @@ message TypeAction { string selector = 1; string text = 2; }
 message WaitAction { int32 time = 1; }
 message EvaluateAction { string evaluateFunction = 1; }
 message ReloadAction { }
+message SetViewportAction { int32 width = 1; int32 height = 2; }
+
+//mobile
+message EmulateAction { string device = 1; } // https://github.com/puppeteer/puppeteer/blob/master/src/DeviceDescriptors.ts
+message TapAction { string selector = 1; }
+// drag and drop
+
+message PdfAction { string path = 1; string format = 2; } // Work with headless: true
+message EmulateMediaTypeAction { string type = 1; }
+
+//Cookies
+message CookiesAction { }
+message SetCookieAction { string name = 1; string value = 2; }
+message DeleteCookieAction { string name = 1; }

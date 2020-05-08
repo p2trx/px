@@ -12,7 +12,8 @@
 - [ ] maximize
 - [ ] cookie
 - [x] evaluate
-- [ ] pdf
+- [x] pdf
 - [x] reload
-- [ ] execute JS
-- [ ] touch events
+- [x] execute JS
+- [x] touch events
+- [x] emulate
