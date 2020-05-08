@@ -4,6 +4,7 @@ import client as px
 
 def doActions():
     start = timer()
+    px.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
     px.type(selector='#first-name', text='First Name'),
     px.type(selector='#last-name', text='Last Name'),
     px.click(selector='input[type=radio][name=gender]'),
@@ -29,17 +30,16 @@ def doActions():
 
 
 def do():
+    start = timer()
     px.launch(),
-    px.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
+    elapsed = timer() - start
+    print('Elapsed: {:.3f}s'.format(elapsed))
     doActions()
 
 
 def run():
     px.setup(url='localhost:50000')
     do()
-    # with grpc.insecure_channel('localhost:50000') as channel:
-    #     stub = BrowserStub(channel)
-    #     do(stub)
 
 
 if __name__ == "__main__":
