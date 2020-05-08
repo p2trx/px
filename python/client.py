@@ -4,6 +4,8 @@ from px.px_pb2_grpc import BrowserStub
 
 latest_stub = None
 
+debug = False
+
 def launch(stub=None):
     action = px.Action(launchAction=px.LaunchAction(headless=False))
     do_request(stub=stub, actions=[action])

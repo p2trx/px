@@ -33,7 +33,7 @@ def do():
     start = timer()
     px.launch(),
     elapsed = timer() - start
-    print('Elapsed: {:.3f}s'.format(elapsed))
+    print('Launch browser Elapsed: {:.3f}s'.format(elapsed))
     doActions()
 
 
@@ -41,7 +41,7 @@ def run():
     start = timer()
     px.setup(url='localhost:50000')
     elapsed = timer() - start
-    print('Elapsed: {:.3f}s'.format(elapsed))
+    print('Setup Elapsed: {:.3f}s'.format(elapsed))
     do()
 
 
