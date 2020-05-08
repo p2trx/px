@@ -1,7 +1,7 @@
 import grpc
 from px.px_pb2_grpc import BrowserStub
 from timeit import default_timer as timer
-import action as px
+import client as px
 
 
 def doActions(stub):
