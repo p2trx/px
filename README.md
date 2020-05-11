@@ -2,7 +2,7 @@
 
 ## Add new command
 
-- Update px.proto
+- Update `proto/px/px.proto`
 - Update `actions/index.js`
 - Update `driver/index.js`
 

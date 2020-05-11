@@ -8,7 +8,7 @@ const { mobileScenario } = require('./mobileScenario')
 main()
 
 function main() {
-  const PROTO_PATH = path.join(__dirname, '../px.proto')
+  const PROTO_PATH = path.join(__dirname, '..', 'proto', 'px', 'px.proto')
   const packageDefinition = protoLoader.loadSync(PROTO_PATH)
   const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
   const px = protoDescriptor.px
