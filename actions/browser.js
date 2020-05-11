@@ -8,20 +8,12 @@ const close = () => {
   return driver.close()
 }
 
-const goto = ({ url }) => {
-  return driver.goto(url)
+const cookies = async () => {
+  return driver.cookies()
 }
 
-const focus = async ({ selector }) => {
-  return driver.focus(selector)
-}
-
-const reload = () => {
-  return driver.reload()
-}
-
-const setViewport = ({ width, height }) => {
-  return driver.setViewport(width, height)
+const deleteCookie = async ({ name }) => {
+  return driver.deleteCookie(name)
 }
 
 const emulate = ({ device }) => {
@@ -32,28 +24,36 @@ const emulateMediaType = async ({ type }) => {
   return driver.emulateMediaType(type)
 }
 
+const focus = async ({ selector }) => {
+  return driver.focus(selector)
+}
+
+const goto = ({ url }) => {
+  return driver.goto(url)
+}
+
+const reload = () => {
+  return driver.reload()
+}
+
 const setCookie = async ({ name, value }) => {
   return driver.setCookie(name, value)
 }
 
-const deleteCookie = async ({ name }) => {
-  return driver.deleteCookie(name)
-}
-
-const cookies = async () => {
-  return driver.cookies()
+const setViewport = ({ width, height }) => {
+  return driver.setViewport(width, height)
 }
 
 module.exports = {
   close,
+  cookies,
+  deleteCookie,
+  emulate,
+  emulateMediaType,
   focus,
   goto,
   launch,
   reload,
-  setViewport,
-  emulate,
-  emulateMediaType,
   setCookie,
-  deleteCookie,
-  cookies
+  setViewport
 }

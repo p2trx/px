@@ -1,42 +1,24 @@
 const puppeteer = require('puppeteer')
 
-const launch = async headless => {
-  global.browser = await puppeteer.launch({
-    headless
-  })
-  const { browser } = global
-  global.page = await browser.newPage()
-  return setViewport(1024, 768)
-}
-
 const close = () => {
   const { browser } = global
   return browser.close()
 }
 
-const goto = url => {
+const cookies = async () => {
   const { page } = global
-  return page.goto(url)
+  const cookies = await page.cookies()
+  console.log(cookies)
 }
 
-const focus = selector => {
+const deleteCookie = async name => {
   const { page } = global
-  return page.focus(selector)
-}
-
-const reload = () => {
-  const { page } = global
-  return page.reload()
-}
-
-const setViewport = (width, height) => {
-  const { page } = global
-  return page.setViewport({ width, height })
+  const result = await page.deleteCookie({ name })
+  return result
 }
 
 const emulate = device => {
   const genDevice = puppeteer.devices[device]
-
   const { page } = global
   return page.emulate(genDevice)
 }
@@ -46,34 +28,51 @@ const emulateMediaType = type => {
   return page.emulateMediaType(type)
 }
 
+const focus = selector => {
+  const { page } = global
+  return page.focus(selector)
+}
+
+const goto = url => {
+  const { page } = global
+  return page.goto(url)
+}
+
+const launch = async headless => {
+  global.browser = await puppeteer.launch({
+    headless
+  })
+  const { browser } = global
+  global.page = await browser.newPage()
+  return setViewport(1024, 768)
+}
+
+const reload = () => {
+  const { page } = global
+  return page.reload()
+}
+
 const setCookie = async (name, value) => {
   const { page } = global
   const result = await page.setCookie({ name, value })
   return result
 }
 
-const deleteCookie = async name => {
+const setViewport = (width, height) => {
   const { page } = global
-  const result = await page.deleteCookie({ name })
-  return result
-}
-
-const cookies = async () => {
-  const { page } = global
-  const cookies = await page.cookies()
-  console.log(cookies)
+  return page.setViewport({ width, height })
 }
 
 module.exports = {
   close,
+  cookies,
+  deleteCookie,
+  emulate,
+  emulateMediaType,
   focus,
   goto,
   launch,
   reload,
-  setViewport,
-  emulate,
-  emulateMediaType,
   setCookie,
-  deleteCookie,
-  cookies
+  setViewport
 }
