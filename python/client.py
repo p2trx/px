@@ -27,7 +27,7 @@ class Client:
         actions = px.Action(clearAndTypeAction=px.ClearAndTypeAction(selector=selector, text=text))
         self.do_request(actions)
 
-    def click(self, selector, button="left", clickCount=1):
+    def click(self, selector, button=None, clickCount=None):
         actions = px.Action(clickAction=px.ClickAction(selector=selector, button=button, clickCount=clickCount))
         self.do_request(actions)
 
