@@ -14,3 +14,6 @@ dist/*
 
 test/*
 !test/*.js
+
+python/py/px*
+*.pyc
