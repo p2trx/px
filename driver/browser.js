@@ -1,39 +1,32 @@
 const puppeteer = require('puppeteer')
-const path = require('path')
-
-const launch = async headless => {
-  const executablePath = getExecutablePath();
-  global.browser = await puppeteer.launch({ headless, executablePath })
-  const { browser } = global
-  global.page = await browser.newPage()
-  const { page } = global
-  return page.setViewport({ width: 1024, height: 768 })
-}
-
-const getExecutablePath = () => {
-  let chromiumExecutablePath = puppeteer.executablePath();
-  const isPkg = typeof process.pkg !== 'undefined'
-  if (isPkg) {
-    chromiumExecutablePath = puppeteer.executablePath().replace(
-      /^.*?\/node_modules\/puppeteer\/\.local-chromium/,
-      getBrowserFolder()
-    )
-  }
-  return chromiumExecutablePath;
-}
-
-const getBrowserFolder = () => {
-  return path.join(path.dirname(process.execPath), '.local-chromium');
-}
+const getExecutablePath = require('../setup')
 
 const close = () => {
   const { browser } = global
   return browser.close()
 }
 
-const goto = url => {
+const cookies = async () => {
   const { page } = global
-  return page.goto(url)
+  const cookies = await page.cookies()
+  console.log(cookies)
+}
+
+const deleteCookie = async name => {
+  const { page } = global
+  const result = await page.deleteCookie({ name })
+  return result
+}
+
+const emulate = device => {
+  const genDevice = puppeteer.devices[device]
+  const { page } = global
+  return page.emulate(genDevice)
+}
+
+const emulateMediaType = type => {
+  const { page } = global
+  return page.emulateMediaType(type)
 }
 
 const focus = selector => {
@@ -41,10 +34,45 @@ const focus = selector => {
   return page.focus(selector)
 }
 
+const goto = url => {
+  const { page } = global
+  return page.goto(url)
+}
+
+const launch = async headless => {
+  const executablePath = getExecutablePath()
+  const browser = await puppeteer.launch({ headless, executablePath })
+  global.browser = browser
+  global.page = await browser.newPage()
+  return setViewport(1024, 768)
+}
+
+const reload = () => {
+  const { page } = global
+  return page.reload()
+}
+
+const setCookie = async (name, value) => {
+  const { page } = global
+  const result = await page.setCookie({ name, value })
+  return result
+}
+
+const setViewport = (width, height) => {
+  const { page } = global
+  return page.setViewport({ width, height })
+}
+
 module.exports = {
   close,
+  cookies,
+  deleteCookie,
+  emulate,
+  emulateMediaType,
   focus,
   goto,
   launch,
-  getBrowserFolder
+  reload,
+  setCookie,
+  setViewport
 }
