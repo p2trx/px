@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const getExecutablePath = require('../setup')
+const { getExecutablePath } = require('../setup')
 
 const close = () => {
   const { browser } = global
