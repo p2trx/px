@@ -1,9 +1,9 @@
 const driver = require('../driver')
 
-const takeScreenshot = ({ path, fullPage }) => {
-  return driver.takeScreenshot(path, fullPage)
+const screenshot = ({ path, fullPage }) => {
+  return driver.screenshot(path, fullPage)
 }
 
 module.exports = {
-  takeScreenshot
+  screenshot
 }
