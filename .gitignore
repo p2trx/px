@@ -17,3 +17,4 @@ test/*
 
 
 python/py/px*
+python/*.pyc
