@@ -1,11 +1,11 @@
 const driver = require('../driver')
 
-const startTracing = ({ path, screenshots = true }) => {
-  return driver.startTracing(path, screenshots)
+const startTracing = async ({ path, screenshots = true }) => {
+  await driver.startTracing(path, screenshots)
 }
 
-const stopTracing = () => {
-  return driver.stopTracing()
+const stopTracing = async () => {
+  await driver.stopTracing()
 }
 
 module.exports = {

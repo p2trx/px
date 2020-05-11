@@ -8,8 +8,7 @@ const close = () => {
 
 const cookies = async () => {
   const { page } = global
-  const cookies = await page.cookies()
-  console.log(cookies)
+  return page.cookies()
 }
 
 const deleteCookie = async name => {
