@@ -10,8 +10,10 @@ __pycache__
 java/proto-gen-mac
 python/px/px_pb2*.py
 
+dist/*
+
 test/*
 !test/*.js
 
+
 python/py/px*
-dist
