@@ -11,4 +11,4 @@ java/proto-gen-mac
 python/px/px_pb2*.py
 
 test/*
-!test/test.js
+!test/*.js

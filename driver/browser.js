@@ -39,10 +39,10 @@ const goto = url => {
 }
 
 const launch = async headless => {
-  global.browser = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     headless
   })
-  const { browser } = global
+  global.browser = browser
   global.page = await browser.newPage()
   return setViewport(1024, 768)
 }

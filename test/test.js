@@ -1,7 +1,9 @@
 const path = require('path')
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
-const testcase = require('./testcase')
+
+const { webScenario } = require('./webScenario')
+const { mobileScenario } = require('./mobileScenario')
 
 main()
 
@@ -15,37 +17,10 @@ function main() {
     'localhost:50000',
     grpc.credentials.createInsecure()
   )
-  const actions = {
-    actions: [
-      {
-        launchAction: {
-          headless: false
-        }
-      }
-    ]
-  }
-  client.do(actions, function(err, response) {
-    if (err) {
-      console.error('Cannot execute actions', err)
-    }
-    doActions(client)
-  })
-}
-
-function doActions(client) {
-  const begin = new Date()
-  const scenario = testcase.webScenario
-
-  const actions = []
-  const loopTimes = 1
-  for (var i = 0; i < loopTimes; i++) {
-    actions.push(...scenario)
-  }
+  const actions = [...webScenario, ...mobileScenario]
   client.do({ actions }, function(err, response) {
     if (err) {
       console.error('Cannot execute actions', err)
     }
-    const end = new Date()
-    console.log(end.getTime() - begin.getTime())
   })
 }

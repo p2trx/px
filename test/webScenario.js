@@ -1,5 +1,10 @@
 const webScenario = [
   {
+    launchAction: {
+      headless: false
+    }
+  },
+  {
     gotoAction: {
       url: 'https://katalon-test.s3.amazonaws.com/aut/html/form.html'
     }
@@ -16,7 +21,7 @@ const webScenario = [
   },
   {
     deleteCookieAction: {
-      name: 'jwt_token',
+      name: 'jwt_token'
     }
   },
   {
@@ -24,7 +29,7 @@ const webScenario = [
   },
   {
     startTracingAction: {
-      path: 'test/trace.json'
+      path: 'test/output/trace.json'
     }
   },
   {
@@ -44,12 +49,6 @@ const webScenario = [
       text: 'Last Name'
     }
   },
-  // {
-  //   clickAction: {
-  //     selector: 'input[type=radio][name=gender]',
-  //     button: 'right'
-  //   }
-  // },
   {
     clickAction: {
       selector: 'input[type=radio][name=gender]'
@@ -149,8 +148,8 @@ const webScenario = [
     }
   },
   {
-    takeScreenshotAction: {
-      path: 'test/screenshoot/screenshot.png',
+    screenshotAction: {
+      path: 'test/output/screenshot.png',
       fullPage: true
     }
   },
@@ -190,8 +189,8 @@ const webScenario = [
     }
   },
   {
-    takeScreenshotAction: {
-      path: 'test/screenshoot/double_click.png',
+    screenshotAction: {
+      path: 'test/output/double_click.png',
       fullPage: true
     }
   },
@@ -200,12 +199,6 @@ const webScenario = [
       type: 'screen'
     }
   },
-  // {
-  //   pdfAction: {
-  //     path: 'test/test.pdf',
-  //     format: 'A4'
-  //   }
-  // },
   {
     gotoAction: {
       url: 'https://www.youtube.com/watch?v=T5GSLc-i5Xo'
@@ -221,6 +214,26 @@ const webScenario = [
   },
   {
     stopTracingAction: {}
+  },
+  {
+    closeAction: {}
+  },
+  {
+    launchAction: {
+      headless: true
+    }
+  },
+  {
+    gotoAction: {
+      url: 'https://google.com',
+      headless: true
+    }
+  },
+  {
+    pdfAction: {
+      path: 'test/output/test.pdf',
+      format: 'A4'
+    }
   },
   {
     closeAction: {}

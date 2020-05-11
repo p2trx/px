@@ -1,5 +1,10 @@
 const mobileScenario = [
   {
+    launchAction: {
+      headless: false
+    }
+  },
+  {
     emulateAction: {
       device: 'iPhone X'
     }
@@ -13,11 +18,6 @@ const mobileScenario = [
   {
     gotoAction: {
       url: 'https://katalon-test.s3.amazonaws.com/aut/html/form.html'
-    }
-  },
-  {
-    startTracingAction: {
-      path: 'test/trace.json'
     }
   },
   {
@@ -147,12 +147,9 @@ const mobileScenario = [
   },
   {
     takeScreenshotAction: {
-      path: 'test/screenshoot/mobile.png',
+      path: 'test/output/mobile.png',
       fullPage: true
     }
-  },
-  {
-    stopTracingAction: {}
   },
   {
     closeAction: {}
