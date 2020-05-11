@@ -8,11 +8,12 @@
 
 ## Missing commands
 
-- [ ] doubleClick
+- [x] doubleClick
 - [ ] maximize
-- [ ] cookie
-- [ ] evaluate
-- [ ] pdf
-- [ ] reload
-- [ ] execute JS
-- [ ] touch events
+- [x] cookie
+- [x] evaluate
+- [x] pdf
+- [x] reload
+- [x] execute JS
+- [x] touch events
+- [x] emulate
