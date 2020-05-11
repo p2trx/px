@@ -6,14 +6,14 @@
 - Update `actions/index.js`
 - Update `driver/index.js`
 
-## Missing commands
+## TODO
 
-- [x] doubleClick
 - [ ] maximize
 - [x] cookie
+- [x] doubleClick
+- [x] emulate
 - [x] evaluate
+- [x] execute JS
 - [x] pdf
 - [x] reload
-- [x] execute JS
-- [x] touch events
-- [x] emulate
+- [x] tap
