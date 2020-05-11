@@ -10,7 +10,7 @@
 
 - [x] doubleClick
 - [ ] maximize
-- [ ] cookie
+- [x] cookie
 - [x] evaluate
 - [x] pdf
 - [x] reload
