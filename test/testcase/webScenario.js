@@ -12,6 +12,17 @@ const webScenario = [
     }
   },
   {
+    cookiesAction: {}
+  },
+  {
+    deleteCookieAction: {
+      name: 'jwt_token',
+    }
+  },
+  {
+    cookiesAction: {}
+  },
+  {
     startTracingAction: {
       path: 'test/trace.json'
     }
@@ -189,12 +200,12 @@ const webScenario = [
       type: 'screen'
     }
   },
-  {
-    pdfAction: {
-      path: 'test/test.pdf',
-      format: 'A4'
-    }
-  },
+  // {
+  //   pdfAction: {
+  //     path: 'test/test.pdf',
+  //     format: 'A4'
+  //   }
+  // },
   {
     gotoAction: {
       url: 'https://www.youtube.com/watch?v=T5GSLc-i5Xo'

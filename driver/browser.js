@@ -46,9 +46,15 @@ const emulateMediaType = type => {
   return page.emulateMediaType(type)
 }
 
-const setCookie = async cookie => {
+const setCookie = async (name, value) => {
   const { page } = global
-  const result = await page.setCookie(cookie)
+  const result = await page.setCookie({ name, value })
+  return result
+}
+
+const deleteCookie = async name => {
+  const { page } = global
+  const result = await page.deleteCookie({ name })
   return result
 }
 
@@ -68,5 +74,6 @@ module.exports = {
   emulate,
   emulateMediaType,
   setCookie,
+  deleteCookie,
   cookies
 }

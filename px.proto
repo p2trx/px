@@ -73,7 +73,8 @@ message EmulateAction { string device = 1; } // https://github.com/puppeteer/pup
 message TapAction { string selector = 1; }
 // drag and drop
 
-message PdfAction { string path = 1; string format = 2; } // Work with headless: true
+//Generating a pdf is currently only supported in Chrome headless.
+message PdfAction { string path = 1; string format = 2; }
 message EmulateMediaTypeAction { string type = 1; }
 
 //Cookies

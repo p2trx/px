@@ -19,7 +19,7 @@ function main() {
     actions: [
       {
         launchAction: {
-          headless: true
+          headless: false
         }
       }
     ]

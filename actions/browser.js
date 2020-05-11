@@ -32,8 +32,12 @@ const emulateMediaType = async ({ type }) => {
   return driver.emulateMediaType(type)
 }
 
-const setCookie = async ({ cookie }) => {
-  return driver.setCookie(cookie)
+const setCookie = async ({ name, value }) => {
+  return driver.setCookie(name, value)
+}
+
+const deleteCookie = async ({ name }) => {
+  return driver.deleteCookie(name)
 }
 
 const cookies = async () => {
@@ -50,5 +54,6 @@ module.exports = {
   emulate,
   emulateMediaType,
   setCookie,
+  deleteCookie,
   cookies
 }
