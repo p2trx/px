@@ -44,7 +44,7 @@ class Client:
         self.do_request(actions=[actions])
 
 
-    def get_text(self, selector):
+    def get_inner_text(self, selector):
         actions = px.Action(getInnerTextAction=px.GetInnerTextAction(selector=selector))
         self.do_request(actions=[actions])
 

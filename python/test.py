@@ -23,7 +23,7 @@ def doActions(px):
     px.click(selector='.development-ways .checkbox:nth-child(6) input'),
     px.type(selector='#comment', text='Comment'),
     px.click(selector='#submit'),
-    px.get_text(selector='#submit-msg'),
+    px.get_inner_text(selector='#submit-msg'),
     elapsed = timer() - start
     print('Elapsed: {:.3f}s'.format(elapsed))
 
