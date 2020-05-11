@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const getExecutablePath = require('../setup')
 
 const close = () => {
   const { browser } = global
@@ -39,9 +40,8 @@ const goto = url => {
 }
 
 const launch = async headless => {
-  const browser = await puppeteer.launch({
-    headless
-  })
+  const executablePath = getExecutablePath()
+  const browser = await puppeteer.launch({ headless, executablePath })
   global.browser = browser
   global.page = await browser.newPage()
   return setViewport(1024, 768)

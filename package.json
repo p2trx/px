@@ -3,16 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "prebuild": "rm -rf dist/*",
+    "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist",
+    "postbuild": "cp -r ./node_modules/grpc/src/node/extension_binary/**/* ./dist && cp -r ./node_modules/puppeteer/.local-chromium ./dist/.local-chromium",
     "lint": "eslint **/**.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it --ci"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "grpc": "^1.24.2",
+    "path": "^0.12.7",
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
@@ -25,6 +31,12 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+    "pkg": "^4.4.8",
+    "prettier": "^1.19.1",
+    "release-it": "^13.5.8"
+  },
+  "pkg": {
+    "assets": "px.proto",
+    "scripts": "./node_modules/grpc/src/node/extension_binary/**/*"
   }
 }
