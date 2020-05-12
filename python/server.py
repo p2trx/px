@@ -2,14 +2,15 @@ import urllib.request
 import zipfile
 import os, stat, errno, subprocess, socket
 import threading
+from pathlib import Path
 
 class Server:
 
+    px_home_dir = os.path.join(Path.home(), '.px')
+
     px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px.zip'
 
-    px_server_package_path = '/Users/quiducle/Documents/Projects/px/python/px-server.zip'
-
-    unzip_px_server_package_path = '/Users/quiducle/Documents/Projects/px/python/px-server'
+    unzip_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
     px_file_path = os.path.join(unzip_px_server_package_path, 'px')
 
@@ -25,7 +26,6 @@ class Server:
 
     def setup(self):
         px_server_package_download_url = self.px_server_package_download_url
-        px_server_package_path = self.px_server_package_path
         unzip_px_server_package_path = self.unzip_px_server_package_path
         px_file_path = self.px_file_path
         grpc_file_path = self.grpc_file_path
@@ -44,15 +44,15 @@ class Server:
                     raise
 
             print('Downloading px server package...')
-            urllib.request.urlretrieve(px_server_package_download_url, px_server_package_path)
+            file_name, header = urllib.request.urlretrieve(px_server_package_download_url)
 
             print('Extracting px server package...')
-            with zipfile.ZipFile(px_server_package_path, 'r') as zip_ref:
+            with zipfile.ZipFile(file_name, 'r') as zip_ref:
                 zip_ref.extractall(unzip_px_server_package_path)
 
             try:
                 print('Deleting px server package...')
-                os.remove(px_server_package_path)
+                os.remove(file_name)
             except OSError:
                 pass
 
