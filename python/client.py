@@ -13,6 +13,8 @@ class Client:
 
     server = None
 
+    url = None
+
     def __init__(self, url=None, debug=False):
         if url is None:
             self.server = Server()
