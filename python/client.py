@@ -14,8 +14,11 @@ class Client:
     server = None
 
     def __init__(self, url=None, debug=False):
-        self.server = Server()
-        self.channel = grpc.insecure_channel('localhost:' + self.server.port)
+        if url is None:
+            self.server = Server()
+            url = 'localhost:' + self.server.port
+        self.url = url
+        self.channel = grpc.insecure_channel(self.url)
         self.stub = BrowserStub(self.channel)
         self.debug = debug
 
