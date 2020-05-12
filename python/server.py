@@ -46,7 +46,7 @@ class Server:
             print('Downloading px server package...')
             file_name, header = urllib.request.urlretrieve(px_server_package_download_url)
 
-            print('Extracting px server package...')
+            print('Extracting px server package from {} to {}'.format(file_name, unzip_px_server_package_path))
             with zipfile.ZipFile(file_name, 'r') as zip_ref:
                 zip_ref.extractall(unzip_px_server_package_path)
 
