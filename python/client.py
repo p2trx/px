@@ -1,6 +1,7 @@
 import grpc
 import px.px_pb2 as px
 from px.px_pb2_grpc import BrowserStub
+from server import Server
 
 class Client:
 
@@ -10,8 +11,11 @@ class Client:
 
     debug = False
 
-    def __init__(self, url, debug=False):
-        self.channel = grpc.insecure_channel(url)
+    server = None
+
+    def __init__(self, url=None, debug=False):
+        self.server = Server()
+        self.channel = grpc.insecure_channel('localhost:' + self.server.port)
         self.stub = BrowserStub(self.channel)
         self.debug = debug
 

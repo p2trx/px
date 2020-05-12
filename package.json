@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon index.js 50000",
     "prebuild": "rm -rf dist/*",
     "build": "pkg package.json -t node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path dist",
     "postbuild": "cp -r ./node_modules/grpc/src/node/extension_binary/**/* ./dist && cp -r ./node_modules/puppeteer/.local-chromium ./dist/.local-chromium",

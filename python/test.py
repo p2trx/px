@@ -1,7 +1,7 @@
 from client import Client
 
 def run():
-    px = Client('localhost:50000')
+    px = Client()
     px.launch()
     px.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
     px.type(selector='#first-name', text='First Name'),
