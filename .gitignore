@@ -8,13 +8,20 @@ node_modules
 .vscode
 __pycache__
 java/proto-gen-mac
+java/.settings
+
 python/px/px_pb2*.py
+python/build
+python/dist
+python/ckpx.egg-info
+python/px_server/package
 
 dist/*
 
 test/*
 !test/*.js
 !test/*.py
+!test/java-test
 
 python/py/px*
 *.pyc
