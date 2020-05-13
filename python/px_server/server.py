@@ -13,7 +13,7 @@ mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-mac.z
 
 linux_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-linux.zip'
 
-default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
+default_px_server_package_path = os.path.join(px_home_dir, 'package')
 
 default_os_name = platform.system()
 
@@ -54,8 +54,8 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
         except OSError:
             pass
 
-        os.chmod(grpc_file_path, 0o755)
-        os.chmod(px_server_executable_file_path, 0o755)
+    os.chmod(grpc_file_path, 0o755)
+    os.chmod(px_server_executable_file_path, 0o755)
 
 def get_px_server_package_download_url(os_name=None, version=None):
     if os_name is None:
@@ -76,12 +76,18 @@ class Server:
 
     thread = None
 
+    px_server_executable_file_path = default_px_server_package_path
+
     def __init__(self):
+        path = os.path.abspath(__file__)
+        dir_path = os.path.dirname(path)
+        self.px_server_executable_file_path = os.path.join(dir_path, 'package', 'mac')
+
         self.setup()
         self.start()
 
     def setup(self):
-        download_and_extract_px_server_package()
+        download_and_extract_px_server_package(px_server_package_path=self.px_server_executable_file_path)
 
     def stop(self):
         logging.info('Stopping px server...')
@@ -91,6 +97,6 @@ class Server:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         self.port = s.getsockname()[1]
-        px_server_executable_file_path = os.path.join(default_px_server_package_path, 'px')
+        px_server_executable_file_path = os.path.join(self.px_server_executable_file_path, 'px')
         self.thread = threading.Thread(target=subprocess.call, args=[[px_server_executable_file_path, str(self.port)]], daemon=True)
         self.thread.start()
