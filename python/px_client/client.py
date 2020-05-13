@@ -1,7 +1,7 @@
 import grpc
 import px.px_pb2 as px
 from px.px_pb2_grpc import BrowserStub
-from server.server import Server
+from px_server.server import Server
 import logging
 
 class Client:

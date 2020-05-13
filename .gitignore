@@ -9,7 +9,7 @@ node_modules
 __pycache__
 java/proto-gen-mac
 python/px/px_pb2*.py
-python/server
+python/px_server
 
 dist/*
 
