@@ -1,4 +1,4 @@
-from client import Client
+from client.client import Client
 
 def run():
     px = Client()
