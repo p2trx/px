@@ -2,10 +2,7 @@ import urllib.request
 import zipfile
 import os, stat, errno, subprocess, socket, platform
 import threading
-from pathlib import Path
 import logging
-
-px_home_dir = os.path.join(Path.home(), '.px')
 
 windows_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-windows.zip'
 
@@ -13,7 +10,7 @@ mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-mac.z
 
 linux_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-linux.zip'
 
-default_px_server_package_path = os.path.join(px_home_dir, 'package')
+default_px_server_package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
 
 default_os_name = platform.system()
 
@@ -21,12 +18,17 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
     if os_name is None:
         os_name = default_os_name
 
+    if version is None:
+        version = ''
+
+    px_server_package_download_url = get_px_server_package_download_url(os_name=os_name, version=version)
+
     if px_server_package_path is None:
         px_server_package_path = default_px_server_package_path
 
+    px_server_package_path = os.path.join(px_server_package_path, '{}{}'.format(os_name, version))
     px_server_executable_file_path = os.path.join(px_server_package_path, 'px')
     grpc_file_path = os.path.join(px_server_package_path, 'grpc_node.node')
-    px_server_package_download_url = get_px_server_package_download_url(os_name=os_name, version=version)
 
     if not os.path.exists(px_server_executable_file_path) or not os.path.exists(grpc_file_path):
         try:
@@ -57,6 +59,8 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
     os.chmod(grpc_file_path, 0o755)
     os.chmod(px_server_executable_file_path, 0o755)
 
+    return px_server_package_path
+
 def get_px_server_package_download_url(os_name=None, version=None):
     if os_name is None:
         os_name = default_os_name
@@ -76,18 +80,14 @@ class Server:
 
     thread = None
 
-    px_server_executable_file_path = default_px_server_package_path
+    px_server_package_path = default_px_server_package_path
 
     def __init__(self):
-        path = os.path.abspath(__file__)
-        dir_path = os.path.dirname(path)
-        self.px_server_executable_file_path = os.path.join(dir_path, 'package', 'mac')
-
         self.setup()
         self.start()
 
     def setup(self):
-        download_and_extract_px_server_package(px_server_package_path=self.px_server_executable_file_path)
+        self.px_server_package_path = download_and_extract_px_server_package()
 
     def stop(self):
         logging.info('Stopping px server...')
@@ -97,6 +97,6 @@ class Server:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         self.port = s.getsockname()[1]
-        px_server_executable_file_path = os.path.join(self.px_server_executable_file_path, 'px')
+        px_server_executable_file_path = os.path.join(self.px_server_package_path, 'px')
         self.thread = threading.Thread(target=subprocess.call, args=[[px_server_executable_file_path, str(self.port)]], daemon=True)
         self.thread.start()
