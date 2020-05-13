@@ -3,6 +3,7 @@ import zipfile
 import os, stat, errno, subprocess, socket, platform
 import threading
 from pathlib import Path
+import logging
 
 class Server:
 
@@ -54,15 +55,15 @@ class Server:
                 if e.errno != errno.ENOENT:
                     raise
 
-            print('Downloading px server package...')
+            logging.info('Downloading px server package...')
             file_name, header = urllib.request.urlretrieve(px_server_package_download_url)
 
-            print('Extracting px server package from {} to {}'.format(file_name, px_server_package_path))
+            logging.info('Extracting px server package from {} to {}'.format(file_name, px_server_package_path))
             with zipfile.ZipFile(file_name, 'r') as zip_ref:
                 zip_ref.extractall(px_server_package_path)
 
             try:
-                print('Deleting px server package...')
+                logging.info('Deleting px server package...')
                 os.remove(file_name)
             except OSError:
                 pass
@@ -84,10 +85,10 @@ class Server:
             raise Exception('Unsupported OS: {}'.format(os_name))
 
     def stop(self):
-        print('Stopping px server...')
+        logging.info('Stopping px server...')
 
     def start(self):
-        print('Starting px server...')
+        logging.info('Starting px server...')
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         self.port = s.getsockname()[1]

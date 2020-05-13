@@ -2,6 +2,7 @@ import grpc
 import px.px_pb2 as px
 from px.px_pb2_grpc import BrowserStub
 from server import Server
+import logging
 
 class Client:
 
@@ -28,7 +29,7 @@ class Client:
     def __del__(self):
         if self.channel is not None:
             self.channel.close()
-            print('Channel closed')
+            logging.info('Channel closed')
 
     def do_request(self, actions):
         request = px.DoRequest(actions=[actions])
