@@ -10,7 +10,7 @@ class Server:
 
     windows_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-windows.zip'
 
-    mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-macos.zip'
+    mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-mac.zip'
 
     linux_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-linux.zip'
 
