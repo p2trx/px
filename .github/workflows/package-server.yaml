@@ -80,9 +80,9 @@ jobs:
         if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
         run: |
           mkdir -p packages
-          zip -9 -j packages/px-mac.zip px-server-Linux/*
+          zip -9 -j packages/px-linux.zip px-server-Linux/*
           zip -9 -j packages/px-windows.zip px-server-Windows/*
-          zip -9 -j packages/px-linux.zip px-server-macOS/*
+          zip -9 -j packages/px-mac.zip px-server-macOS/*
 
       - name: Draft new release
         env:
