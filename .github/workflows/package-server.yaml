@@ -55,10 +55,13 @@ jobs:
     if: ${{ github.event_name == 'release' }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
       - name: Setup Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache
         uses: actions/cache@v1.0.3
@@ -67,29 +70,29 @@ jobs:
           key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Download artifacts
-          uses: actions/download-artifact@v2
-          with:
-            path: .
+        uses: actions/download-artifact@v2
+        with:
+          path: .
 
       - name: Draft new release
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: ls -al
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ls -al
 
-#      - name: Configure AWS Credentials
-#          uses: aws-actions/configure-aws-credentials@v1
-#          with:
-#            aws-access-key-id: ${{ secrets.AWS_API_KEY }}
-#            aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-#            aws-region: us-east-1
-#
-#      - name: Draft new release
-#          env:
-#            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          run: npm run release
-#
-#      - name: Deploy to s3
-#          run: |
-#            ls -laR
-#            aws s3 cp katalon-agent-linux-x64-*/cli-linux-x64 s3://${{ secrets.AWS_S3_BUCKET }}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_API_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Draft new release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
+
+      - name: Deploy to s3
+        run: |
+          ls -laR
+          aws s3 cp katalon-agent-linux-x64-*/cli-linux-x64 s3://${{ secrets.AWS_S3_BUCKET }}
 
