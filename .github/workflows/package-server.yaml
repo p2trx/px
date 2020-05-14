@@ -50,6 +50,8 @@ jobs:
 
   draft-release:
 
+    needs: build
+
     runs-on: ubuntu-latest
 
 #    if: ${{ github.event_name == 'release' }}
