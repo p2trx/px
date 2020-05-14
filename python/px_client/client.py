@@ -22,6 +22,7 @@ class Client:
         if url is None:
             self.server = Server()
             url = 'localhost:{}'.format(self.server.port)
+
         self.url = url
         self.channel = grpc.insecure_channel(self.url)
         grpc.channel_ready_future(self.channel).result(timeout=300)
