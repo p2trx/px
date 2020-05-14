@@ -34,7 +34,11 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
         px_server_package_path = default_px_server_package_path
 
     px_server_package_path = os.path.join(px_server_package_path, '{os}-{version}'.format(os=os_name, version=version))
-    px_server_executable_file_path = os.path.join(px_server_package_path, 'px')
+    if os_name == 'Windows':
+        px_server_executable_file_name = 'px'
+    else:
+        px_server_executable_file_name = 'px.exe'
+    px_server_executable_file_path = os.path.join(px_server_package_path, px_server_executable_file_name)
     grpc_file_path = os.path.join(px_server_package_path, 'grpc_node.node')
 
     if not os.path.exists(px_server_executable_file_path) or not os.path.exists(grpc_file_path):
