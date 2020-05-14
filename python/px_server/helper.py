@@ -9,7 +9,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 px_home_dir = os.path.join(Path.home(), '.px')
 
-px_server_package_download_root_url = 'https://datquach.s3.amazonaws.com/px-server'
+px_server_package_download_root_url = 'https://ckpx.s3.amazonaws.com/px-server'
 
 windows_px_server_package_download_url = px_server_package_download_root_url + '/{version}/px-windows.zip'
 
@@ -50,7 +50,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
             if e.errno != errno.ENOENT:
                 raise
 
-        logging.info('Downloading px server package...')
+        logging.info('Download px server package from {}'.format(px_server_package_download_url))
         file_name, header = urllib.request.urlretrieve(px_server_package_download_url)
 
         logging.info('Extracting px server package from {} to {}'.format(file_name, px_server_package_path))
@@ -58,7 +58,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
             zip_ref.extractall(px_server_package_path)
 
         try:
-            logging.info('Deleting px server package...')
+            logging.info('Delete px server package {}'.format(file_name))
             os.remove(file_name)
         except OSError:
             pass
