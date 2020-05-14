@@ -84,26 +84,23 @@ jobs:
           zip -9 -j packages/px-windows.zip px-server-Windows/*
           zip -9 -j packages/px-linux.zip px-server-macOS/*
 
-      - name: Draft new release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test
         run: |
           ls -al
-          cd packages
-          ls -al
+          ls -al package
 
+#      - name: Draft new release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: npm run release
+#
 #      - name: Configure AWS Credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
 #          aws-access-key-id: ${{ secrets.AWS_API_KEY }}
 #          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
 #          aws-region: us-east-1
-#
-#      - name: Draft new release
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: npm run release
-#
+
 #      - name: Deploy to s3
 #        run: |
 #          ls -laR

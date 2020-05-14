@@ -23,7 +23,7 @@ module.exports = {
     releaseName: `Release ${version} 🚧${buildInfo}`,
     draft: true,
     assets: [
-      "dist/*"
+      "package/*"
     ]
   },
   npm: false,
