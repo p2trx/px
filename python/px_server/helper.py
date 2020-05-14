@@ -34,6 +34,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
         px_server_package_path = default_px_server_package_path
 
     px_server_package_path = os.path.join(px_server_package_path, '{os}-{version}'.format(os=os_name, version=version))
+
     if os_name == 'Windows':
         px_server_executable_file_name = 'px'
     else:
