@@ -11,11 +11,11 @@ px_home_dir = os.path.join(Path.home(), '.px')
 
 px_server_package_download_root_url = 'https://ckpx.s3.amazonaws.com/px-server'
 
-windows_px_server_package_download_url = px_server_package_download_root_url + '/{version}/px-windows.zip'
+windows_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-windows.zip'
 
-mac_px_server_package_download_url = px_server_package_download_root_url + '/{version}/px-mac.zip'
+mac_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-mac.zip'
 
-linux_px_server_package_download_url = px_server_package_download_root_url + '/{version}/px-linux.zip'
+linux_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-linux.zip'
 
 default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
@@ -76,12 +76,12 @@ def get_px_server_package_download_url(os_name=None, version=None):
         version = px_server.__version__
 
     if os_name == 'Windows':
-        px_server_package_download_url = windows_px_server_package_download_url
+        px_server_package_download_url_template = windows_px_server_package_download_url_template
     elif os_name == 'Linux':
-        px_server_package_download_url = linux_px_server_package_download_url.format(version=version)
+        px_server_package_download_url_template = linux_px_server_package_download_url_template
     elif os_name == 'Darwin':
-        px_server_package_download_url = mac_px_server_package_download_url.format(version=version)
+        px_server_package_download_url_template = mac_px_server_package_download_url_template
     else:
         raise Exception('Unsupported OS: {}'.format(os_name))
 
-    return px_server_package_download_url.format(version=version)
+    return px_server_package_download_url_template.format(version=version)
