@@ -84,15 +84,12 @@ jobs:
           zip -9 -j packages/px-windows.zip px-server-Windows/*
           zip -9 -j packages/px-linux.zip px-server-macOS/*
 
-      - name: Test
-        run: |
-          ls -al
-          ls -al packages
-
       - name: Draft new release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release
+        run: |
+          npm install
+          npm run release
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
