@@ -4,6 +4,8 @@ from px.px_pb2_grpc import BrowserStub
 from px_server.server import Server
 import logging
 
+logging.getLogger().setLevel(logging.INFO)
+
 class Client:
 
     channel = None

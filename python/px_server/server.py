@@ -5,6 +5,8 @@ import logging
 from pathlib import Path
 import time
 
+logging.getLogger().setLevel(logging.INFO)
+
 px_home_dir = os.path.join(Path.home(), '.px')
 
 windows_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-windows.zip'
