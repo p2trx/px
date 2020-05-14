@@ -4,6 +4,7 @@ import os, stat, errno, subprocess, socket, platform
 import logging
 from pathlib import Path
 import time
+import px_server
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -24,7 +25,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
         os_name = default_os_name
 
     if version is None:
-        version = ''
+        version = px_server.__version__
 
     px_server_package_download_url = get_px_server_package_download_url(os_name=os_name, version=version)
 
