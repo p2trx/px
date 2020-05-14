@@ -102,5 +102,5 @@ jobs:
         working-directory: packages
         run: |
           ls -laR
-          aws s3 cp *.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2 --recursive --acl public-read'
+          aws s3 cp *.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2 --recursive --acl public-read
 
