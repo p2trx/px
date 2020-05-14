@@ -3,6 +3,9 @@ import zipfile
 import os, stat, errno, subprocess, socket, platform
 import threading
 import logging
+from pathlib import Path
+
+px_home_dir = os.path.join(Path.home(), '.px')
 
 windows_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-windows.zip'
 
@@ -10,7 +13,8 @@ mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-mac.z
 
 linux_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-linux.zip'
 
-default_px_server_package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
+# default_px_server_package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
+default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
 default_os_name = platform.system()
 
@@ -59,7 +63,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
     os.chmod(grpc_file_path, 0o755)
     os.chmod(px_server_executable_file_path, 0o755)
 
-    return px_server_package_path
+    return px_server_executable_file_path
 
 def get_px_server_package_download_url(os_name=None, version=None):
     if os_name is None:
@@ -80,14 +84,14 @@ class Server:
 
     thread = None
 
-    px_server_package_path = default_px_server_package_path
+    px_server_executable_file_path = None
 
     def __init__(self):
         self.setup()
         self.start()
 
     def setup(self):
-        self.px_server_package_path = download_and_extract_px_server_package()
+        self.px_server_executable_file_path = download_and_extract_px_server_package()
 
     def stop(self):
         logging.info('Stopping px server...')
@@ -97,6 +101,8 @@ class Server:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         self.port = s.getsockname()[1]
-        px_server_executable_file_path = os.path.join(self.px_server_package_path, 'px')
-        self.thread = threading.Thread(target=subprocess.call, args=[[px_server_executable_file_path, str(self.port)]], daemon=True)
+        self.thread = threading.Thread(
+            target=subprocess.call,
+            args=[[self.px_server_executable_file_path, str(self.port)]],
+            daemon=True)
         self.thread.start()
