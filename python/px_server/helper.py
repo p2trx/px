@@ -7,8 +7,6 @@ import px_server
 
 logging.getLogger().setLevel(logging.INFO)
 
-px_home_dir = os.path.join(Path.home(), '.px')
-
 px_server_package_download_root_url = 'https://ckpx.s3.amazonaws.com/px-server'
 
 windows_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-windows.zip'
@@ -16,6 +14,8 @@ windows_px_server_package_download_url_template = px_server_package_download_roo
 mac_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-mac.zip'
 
 linux_px_server_package_download_url_template = px_server_package_download_root_url + '/{version}/px-linux.zip'
+
+px_home_dir = os.path.join(Path.home(), '.px')
 
 default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
