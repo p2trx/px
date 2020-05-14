@@ -102,7 +102,8 @@ jobs:
         working-directory: packages
         run: |
           ls -laR
-          aws s3 cp px-windows.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2/px-windows.zip --acl public-read
-          aws s3 cp px-linux.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2/px-linux.zip --acl public-read
-          aws s3 cp px-mac.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2/px-mac.zip --acl public-read
+          export VERSION=0.0.2
+          aws s3 cp px-windows.zip s3://${{ secrets.AWS_S3_BUCKET }}/${{ VERSION }}/px-windows.zip --acl public-read
+          aws s3 cp px-linux.zip s3://${{ secrets.AWS_S3_BUCKET }}/${{ VERSION }}/px-linux.zip --acl public-read
+          aws s3 cp px-mac.zip s3://${{ secrets.AWS_S3_BUCKET }}/${{ VERSION }}/px-mac.zip --acl public-read
 
