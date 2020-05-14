@@ -37,7 +37,7 @@ class Client:
         request = px.DoRequest(actions=[actions])
         self.stub.Do(request)
 
-    def clearAndType(self, selector, text):
+    def clear_and_type(self, selector, text):
         actions = px.Action(clearAndTypeAction=px.ClearAndTypeAction(selector=selector, text=text))
         self.do_request(actions)
 
@@ -53,7 +53,7 @@ class Client:
         actions = px.Action(cookiesAction=px.CookiesAction())
         self.do_request(actions)
 
-    def deleteCookies(self):
+    def delete_cookies(self):
         actions = px.Action(deleteCookiesAction=px.DeleteCookiesAction())
         self.do_request(actions)
 
