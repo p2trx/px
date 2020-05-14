@@ -32,7 +32,7 @@ def download_and_extract_px_server_package(os_name=None, version=None, px_server
     if px_server_package_path is None:
         px_server_package_path = default_px_server_package_path
 
-    px_server_package_path = os.path.join(px_server_package_path, '{}{}'.format(os_name, version))
+    px_server_package_path = os.path.join(px_server_package_path, '{}-{}'.format(os_name, version))
     px_server_executable_file_path = os.path.join(px_server_package_path, 'px')
     grpc_file_path = os.path.join(px_server_package_path, 'grpc_node.node')
 
