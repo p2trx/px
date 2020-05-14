@@ -1,9 +1,9 @@
 import urllib.request
 import zipfile
 import os, stat, errno, subprocess, socket, platform
-import threading
 import logging
 from pathlib import Path
+import time
 
 px_home_dir = os.path.join(Path.home(), '.px')
 
@@ -13,7 +13,6 @@ mac_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-mac.z
 
 linux_px_server_package_download_url = 'https://datquach.s3.amazonaws.com/px-linux.zip'
 
-# default_px_server_package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
 default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
 default_os_name = platform.system()
@@ -82,7 +81,7 @@ class Server:
 
     port = None
 
-    thread = None
+    process = None
 
     px_server_executable_file_path = None
 
@@ -90,19 +89,20 @@ class Server:
         self.setup()
         self.start()
 
+    def __del__(self):
+        if self.process is not None:
+            self.process.terminate()
+
     def setup(self):
         self.px_server_executable_file_path = download_and_extract_px_server_package()
 
-    def stop(self):
-        logging.info('Stopping px server...')
-
     def start(self):
         logging.info('Starting px server...')
+
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         self.port = s.getsockname()[1]
-        self.thread = threading.Thread(
-            target=subprocess.call,
-            args=[[self.px_server_executable_file_path, str(self.port)]],
-            daemon=True)
-        self.thread.start()
+        self.process = subprocess.Popen([self.px_server_executable_file_path, str(self.port)])
+        time.sleep(1)
+
+        logging.info('Server process id {}'.format(self.process.pid))

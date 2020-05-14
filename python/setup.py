@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-import px_server.server as server
+from px_client.client import Client
 
 class CustomInstall(install):
     def run(self):
-        server.download_and_extract_px_server_package()
         install.run(self)
+        Client()
 
 setup(
     name='ckpx',
@@ -19,5 +19,5 @@ setup(
     # package_data={
     #     'package': ['px_server/package/**/*'],
     # },
-    # cmdclass={'install': CustomInstall},
+    cmdclass={'install': CustomInstall},
 )
