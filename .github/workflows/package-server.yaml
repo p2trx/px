@@ -98,8 +98,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-east-1
 
-#      - name: Deploy to s3
-#        run: |
-#          ls -laR
-#          aws s3 cp katalon-agent-linux-x64-*/cli-linux-x64 s3://${{ secrets.AWS_S3_BUCKET }}
+      - name: Deploy to s3
+        working-directory: packages
+        run: |
+          ls -laR
+          aws s3 cp *.zip s3://${{ secrets.AWS_S3_BUCKET }}/0.0.2 --recursive --acl public-read'
 
