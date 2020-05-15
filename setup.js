@@ -7,23 +7,18 @@ const path = require('path')
 const getExecutablePath = () => {
   let chromiumExecutablePath = puppeteer.executablePath()
   const isPkg = typeof process.pkg !== 'undefined'
-  console.log('QTest1')
-  console.log(chromiumExecutablePath)
-  console.log(isPkg)
   if (isPkg) {
-    console.log('QTest2')
+    console.log('QTest1')
+    console.log(chromiumExecutablePath)
     console.log(getBrowserFolder())
 
-    chromiumExecutablePath = puppeteer
-      .executablePath()
+    chromiumExecutablePath = chromiumExecutablePath
       .replace(
         /^.*?\/node_modules\/puppeteer\/\.local-chromium/,
         getBrowserFolder()
       )
+    console.log(chromiumExecutablePath)
   }
-  console.log('QTest3')
-  console.log(chromiumExecutablePath)
-  console.log(isPkg)
   return chromiumExecutablePath
 }
 
