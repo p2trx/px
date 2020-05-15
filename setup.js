@@ -10,10 +10,6 @@ const getExecutablePath = () => {
   let chromiumExecutablePath = puppeteer.executablePath()
   const isPkg = typeof process.pkg !== 'undefined'
   if (isPkg) {
-    console.log('QTest1')
-    console.log(chromiumExecutablePath)
-    console.log(getBrowserFolder())
-
     if (os.type() === 'Windows_NT') {
       chromiumExecutablePath = chromiumExecutablePath
         .replace(
@@ -27,8 +23,6 @@ const getExecutablePath = () => {
           getBrowserFolder()
         )
     }
-
-    console.log(chromiumExecutablePath)
   }
   return chromiumExecutablePath
 }
