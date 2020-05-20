@@ -1,3 +1,8 @@
+// add an empty argument to the front in case the package is compiled to native code
+if (process.pkg) {
+  process.argv.unshift('')
+}
+
 const { join } = require('path')
 const { setup } = require('./setup')
 
@@ -6,14 +11,20 @@ const { loadSync } = require('@grpc/proto-loader')
 
 const { invoke } = require('./bindings')
 
-function main() {
+const { program } = require('commander')
+
+program
+  .option('-p, --port <value>', 'PX server port', '50000')
+
+program.parse(process.argv)
+
+function main(port) {
   setup()
     .then(() => {
       const PROTO_PATH = join(__dirname, 'proto', 'px', 'px.proto')
       const packageDefinition = loadSync(PROTO_PATH)
       const protoDescriptor = loadPackageDefinition(packageDefinition)
       const px = protoDescriptor.px
-      const port = process.argv[2]
 
       var server = new Server()
       server.addService(px.Browser.service, { Do: invoke })
@@ -27,4 +38,4 @@ function main() {
     })
 }
 
-main()
+main(program.port)
