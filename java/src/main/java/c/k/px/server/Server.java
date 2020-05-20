@@ -32,7 +32,7 @@ public class Server {
 
   public void start() throws IOException {
     this.port = this.getAvailablePort();
-    process = new ProcessBuilder(pxServerExecutableFilePath, port.toString()).start();
+    process = new ProcessBuilder(pxServerExecutableFilePath, "--port", port.toString()).start();
 
     try {
       TimeUnit.SECONDS.sleep(1);
