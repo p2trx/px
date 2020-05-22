@@ -7,7 +7,9 @@ node_modules
 **/*.iml
 .vscode
 __pycache__
+
 java/proto-gen-mac
+java/.settings
 
 python/px/px_pb2*.py
 python/build
@@ -20,6 +22,8 @@ dist/*
 test/*
 !test/*.js
 !test/*.py
+!test/java-test
+test/java-test/.settings
 
 python/py/px*
 *.pyc

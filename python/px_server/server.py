@@ -29,7 +29,7 @@ class Server:
         self.port = s.getsockname()[1]
 
         logging.info('Start px server from {} file on port {}'.format(self.px_server_executable_file_path, self.port))
-        self.process = subprocess.Popen([self.px_server_executable_file_path, str(self.port)])
+        self.process = subprocess.Popen([self.px_server_executable_file_path, '--port', str(self.port)])
         time.sleep(1)
 
     def stop(self):

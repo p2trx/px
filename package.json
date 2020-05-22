@@ -5,12 +5,12 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "start": "nodemon index.js 50000",
+    "start": "nodemon index.js --port 50000",
     "prebuild": "rm -rf dist/*",
-    "build-windows" : "pkg package.json -t node10-win-x64 --out-path dist",
-    "build-linux" : "pkg package.json -t node10-linux-x64 --out-path dist",
-    "build-mac" : "pkg package.json -t node10-macos-x64 --out-path dist",
-    "build" : "node build.js",
+    "build-windows": "pkg package.json -t node10-win-x64 --out-path dist",
+    "build-linux": "pkg package.json -t node10-linux-x64 --out-path dist",
+    "build-mac": "pkg package.json -t node10-macos-x64 --out-path dist",
+    "build": "node build.js",
     "postbuild": "cp -r ./node_modules/grpc/src/node/extension_binary/**/* ./dist",
     "lint": "eslint **/**.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
+    "commander": "^5.1.0",
     "grpc": "^1.24.2",
     "path": "^0.12.7",
     "puppeteer": "^2.1.1"

@@ -21,12 +21,14 @@ default_px_server_package_path = os.path.join(px_home_dir, 'px-server')
 
 default_os_name = platform.system()
 
+default_ps_sever_version = '0.0.1'
+
 def download_and_extract_px_server_package(os_name=None, version=None, px_server_package_path=None):
     if os_name is None:
         os_name = default_os_name
 
     if version is None:
-        version = px_server.__version__
+        version = default_ps_sever_version
 
     px_server_package_download_url = get_px_server_package_download_url(os_name=os_name, version=version)
 
@@ -78,7 +80,7 @@ def get_px_server_package_download_url(os_name=None, version=None):
         os_name = default_os_name
 
     if version is None:
-        version = px_server.__version__
+        version = px_server.default_ps_sever_version
 
     if os_name == 'Windows':
         px_server_package_download_url_template = windows_px_server_package_download_url_template
