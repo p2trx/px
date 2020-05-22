@@ -43,7 +43,7 @@ const webScenario = [
   { emulateMediaTypeAction: { type: 'screen' } },
   { gotoAction: { url: 'https://www.youtube.com/watch?v=T5GSLc-i5Xo' } },
   { reloadAction: {} },
-  { evaluateAction: { evaluateFunction: 'window.scrollTo(0, 1000000)' } },
+  { evaluateAction: { pageFunction: 'window.scrollTo(0, 1000000)' } },
   { stopTracingAction: {} },
   { closeAction: {} },
   { launchAction: { headless: true } },

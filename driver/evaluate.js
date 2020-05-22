@@ -1,6 +1,6 @@
-const evaluate = async evaluateFunction => {
+const evaluate = async pageFunction => {
   const { page } = global
-  const result = await page.evaluateHandle(evaluateFunction)
+  const result = await page.evaluateHandle(pageFunction)
   return result
 }
 

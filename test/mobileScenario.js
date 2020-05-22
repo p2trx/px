@@ -24,7 +24,7 @@ const mobileScenario = [
   { tapAction: { selector: '.development-ways .checkbox:nth-child(5) input' } },
   { tapAction: { selector: '.development-ways .checkbox:nth-child(6) input' } },
   { typeAction: { selector: '#comment', text: 'Comment' } },
-  { evaluateAction: { evaluateFunction: 'window.scrollTo(0, 1000000)' } },
+  { evaluateAction: { pageFunction: 'window.scrollTo(0, 1000000)' } },
   { waitAction: { time: 2000 } },
   { tapAction: { selector: '#submit' } },
   { getInnerTextAction: { selector: '#submit-msg' } },

@@ -1,7 +1,7 @@
 const driver = require('../driver')
 
-const evaluate = async ({ evaluateFunction }) => {
-  const result = await driver.evaluate(evaluateFunction)
+const evaluate = async ({ pageFunction }) => {
+  const result = await driver.evaluate(pageFunction)
   return result
 }
 
