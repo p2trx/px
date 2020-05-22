@@ -1,7 +1,8 @@
 from px_client.client import Client
 
+
 def run():
-    px = Client()
+    px = Client('localhost:50000')
     px.launch()
     px.goto(url='https://katalon-test.s3.amazonaws.com/aut/html/form.html')
     px.type(selector='#first-name', text='First Name')
@@ -25,6 +26,7 @@ def run():
     px.click(selector='#submit')
     px.get_text(selector='#submit-msg')
     px.close()
+
 
 if __name__ == "__main__":
     run()
