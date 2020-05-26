@@ -9,7 +9,7 @@ class CustomInstall(install):
 
 setup(
     name='ckpx',
-    version='0.0.6',
+    version='0.0.7',
     packages=find_packages(),
     install_requires=['grpcio>=1.27.2', 'grpcio-tools>=1.27.2'],
     author='p2trx',
