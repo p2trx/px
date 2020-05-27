@@ -33,7 +33,6 @@ jobs:
       working-directory: ./python
       run: |
         pip install --upgrade setuptools wheel
-#        python setup.py sdist bdist_wheel
         python setup.py sdist
 
     - name: Publish distribution to PyPI
