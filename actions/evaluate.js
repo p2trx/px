@@ -6,7 +6,7 @@ const evaluate = async ({ pageFunction }) => {
 }
 
 const getInnerText = async ({ selector }) => {
-  await driver.waitForSelector(selector)
+  await driver.waitFor(selector)
   const innerText = await driver.getInnerText(selector)
   return innerText
 }
