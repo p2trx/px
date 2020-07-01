@@ -31,9 +31,11 @@ const invoke = (call, callback) => {
         return action.call(this, actionArguments)
       })
     })
-  }).then(function(result) {
-    callback(null, {
-      result
+    p = p.then(function(result) {
+      console.log('result', result)
+      callback(null, {
+        result
+      })
     })
   })
 }
