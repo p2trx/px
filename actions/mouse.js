@@ -1,9 +1,14 @@
 const driver = require('../driver')
 
-const click = async ({ selector, button, clickCount }) => {
-  return driver.click(selector, button, clickCount)
+const click = ({ selector, option }) => {
+  return driver.click(selector, option)
+}
+
+const clickAndWaitForNavigation = ({ selector, option, waitOption }) => {
+  return driver.clickAndWaitForNavigation(selector, option, waitOption)
 }
 
 module.exports = {
-  click
+  click,
+  clickAndWaitForNavigation
 }

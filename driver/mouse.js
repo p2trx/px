@@ -1,16 +1,15 @@
 const { waitFor } = require('./wait')
 
-const click = async (selector, button, clickCount) => {
-  const element = await waitFor(selector)
+const click = (selector, option) =>
+  waitFor(selector).then(element => element.click(option))
 
-  const { page } = global
-  const options = {
-    button,
-    clickCount
-  }
-  return Promise.all([page.waitForNavigation(), element.click(options)])
-}
+const clickAndWaitForNavigation = (selector, option, waitOption) =>
+  Promise.all([
+    global.page.waitForNavigation(waitOption),
+    click(selector, option)
+  ])
 
 module.exports = {
-  click
+  click,
+  clickAndWaitForNavigation
 }
