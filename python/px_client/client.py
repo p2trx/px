@@ -66,8 +66,8 @@ class Client:
         actions = px.Action(gotoAction=px.GotoAction(url=url))
         self.do_request(actions)
 
-    def launch(self):
-        actions = px.Action(launchAction=px.LaunchAction())
+    def launch(self, headless=None, defaultViewport=None):
+        actions = px.Action(launchAction=px.LaunchAction(headless=headless, defaultViewport=defaultViewport))
         self.do_request(actions)
 
     def select(self, selector, values):
