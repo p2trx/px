@@ -42,8 +42,12 @@ class Client:
         actions = px.Action(clearAndTypeAction=px.ClearAndTypeAction(selector=selector, text=text))
         self.do_request(actions)
 
-    def click(self, selector, button=None, clickCount=None):
-        actions = px.Action(clickAction=px.ClickAction(selector=selector, button=button, clickCount=clickCount))
+    def click(self, selector, option=None):
+        actions = px.Action(clickAction=px.ClickAction(selector=selector, option=option))
+        self.do_request(actions)
+
+    def clickAndWaitForNavigation(self, selector, option=None, waitOption=None):
+        actions = px.Action(clickAndWaitForNavigationAction=px.ClickAndWaitForNavigationAction(selector=selector, option=option, waitOption=waitOption))
         self.do_request(actions)
 
     def close(self):
@@ -76,4 +80,8 @@ class Client:
 
     def type(self, selector, text):
         actions = px.Action(typeAction=px.TypeAction(selector=selector, text=text))
+        self.do_request(actions)
+
+    def wait(self, time):
+        actions = px.Action(waitAction=px.WaitAction(time=time))
         self.do_request(actions)
