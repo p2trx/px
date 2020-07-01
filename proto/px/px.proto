@@ -14,6 +14,7 @@ message Action {
     oneof action_oneof {
         ClearAndTypeAction clearAndTypeAction = 12;
         ClickAction clickAction = 3;
+        ClickAndWaitForNavigationAction clickAndWaitForNavigationAction = 27;
         CloseAction closeAction = 7;
         CookiesAction cookiesAction = 24;
         DeleteCookieAction deleteCookieAction = 26;
