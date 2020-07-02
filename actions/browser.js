@@ -24,9 +24,7 @@ const emulateMediaType = async ({ type }) => {
   return driver.emulateMediaType(type)
 }
 
-const focus = async ({ selector }) => {
-  return driver.focus(selector)
-}
+const focus = ({ selector }) => driver.focus(selector)
 
 const goto = ({ url }) => {
   return driver.goto(url)

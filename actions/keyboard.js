@@ -1,12 +1,8 @@
 const driver = require('../driver')
 
-const type = async ({ selector, text }) => {
-  await driver.waitFor(selector)
-  return driver.type(selector, text)
-}
+const type = ({ selector, text }) => driver.type(selector, text)
 
 const clearAndType = async ({ selector, text }) => {
-  await driver.waitFor(selector)
   await driver.focus(selector)
   await driver.keydown('Control')
   await driver.keypress('A')

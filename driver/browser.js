@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 const { getExecutablePath } = require('../setup')
+const { waitFor } = require('./wait')
 
 const close = () => {
   const { browser } = global
@@ -28,10 +29,7 @@ const emulateMediaType = type => {
   return page.emulateMediaType(type)
 }
 
-const focus = selector => {
-  const { page } = global
-  return page.focus(selector)
-}
+const focus = selector => waitFor(selector).then(element => element.focus())
 
 const goto = url => {
   const { page } = global
