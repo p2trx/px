@@ -5,11 +5,7 @@ const evaluate = async ({ pageFunction }) => {
   return result
 }
 
-const getInnerText = async ({ selector }) => {
-  await driver.waitFor(selector)
-  const innerText = await driver.getInnerText(selector)
-  return innerText
-}
+const getInnerText = ({ selector }) => driver.getInnerText(selector)
 
 module.exports = {
   evaluate,
