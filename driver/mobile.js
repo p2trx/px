@@ -1,7 +1,6 @@
-const tap = selector => {
-  const { page } = global
-  return page.tap(selector)
-}
+const { waitFor } = require('./wait')
+
+const tap = selector => waitFor(selector).then(element => element.tap())
 
 module.exports = {
   tap
