@@ -6,7 +6,8 @@ const evaluate = async pageFunction => {
   return result
 }
 
-const getInnerText = selector => waitFor(selector).evaluate(e => e.innerText)
+const getInnerText = selector =>
+  waitFor(selector).then(element => element.evaluate(e => e.innerText))
 
 module.exports = {
   evaluate,
