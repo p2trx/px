@@ -36,7 +36,7 @@ class Client:
 
     def do_request(self, actions):
         request = px.DoRequest(actions=[actions])
-        self.stub.Do(request)
+        return self.stub.Do(request)
 
     def clear_and_type(self, selector, text):
         actions = px.Action(clearAndTypeAction=px.ClearAndTypeAction(selector=selector, text=text))
@@ -64,7 +64,7 @@ class Client:
 
     def get_text(self, selector):
         actions = px.Action(getInnerTextAction=px.GetInnerTextAction(selector=selector))
-        self.do_request(actions)
+        return self.do_request(actions).result
 
     def goto(self, url):
         actions = px.Action(gotoAction=px.GotoAction(url=url))
