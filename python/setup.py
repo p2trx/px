@@ -9,7 +9,7 @@ class CustomInstall(install):
 
 setup(
     name='ckpx',
-    version='0.0.7',
+    version='0.0.8',
     packages=find_packages(),
     install_requires=['grpcio>=1.27.2', 'grpcio-tools>=1.27.2'],
     author='p2trx',
@@ -19,5 +19,5 @@ setup(
     # package_data={
     #     'package': ['px_server/package/**/*'],
     # },
-    cmdclass={'install': CustomInstall},
+    # cmdclass={'install': CustomInstall},
 )
