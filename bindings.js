@@ -41,7 +41,7 @@ const invoke = (call, callback) => {
     .catch(error => {
       callback(null, {
         status: RESPONSE_STATUS.ERROR,
-        result: error
+        error
       })
     })
 }

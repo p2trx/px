@@ -51,11 +51,12 @@ message DeleteCookieAction { string name = 1; } // https://github.com/puppeteer/
 message DoRequest { repeated Action actions = 1; }
 message DoResponse {
     string result = 1;
+    string error = 2;
     enum Status {
         SUCCESS = 0;
         ERROR = 1;
     };
-    Status status = 2;
+    Status status = 3;
 }
 message EmulateAction { string device = 1; } // https://github.com/puppeteer/puppeteer/blob/master/src/DeviceDescriptors.ts
 message EmulateMediaTypeAction { string type = 1; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageemulatemediatypetype
