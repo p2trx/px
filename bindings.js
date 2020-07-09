@@ -4,14 +4,15 @@ const actionPropertySuffix = 'Action'
 
 const actionPropertySuffixLength = actionPropertySuffix.length
 
-let p = new Promise(function(resolve) {
-  resolve()
-})
+const RESPONSE_STATUS = {
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR'
+}
 
 const invoke = (call, callback) => {
-  p.then(function(result) {
-    call.request.actions.forEach(function(actionPayload) {
-      p = p.then(() => {
+  call.request.actions
+    .reduce((p, actionPayload) => {
+      return p.then(() => {
         const actionProperty = Object.keys(actionPayload).find(key =>
           key.endsWith(actionPropertySuffix)
         )
@@ -30,13 +31,19 @@ const invoke = (call, callback) => {
         console.log(actionPayload)
         return action.call(this, actionArguments)
       })
-    })
-    p = p.then(function(result) {
+    }, Promise.resolve())
+    .then(result => {
       callback(null, {
+        status: RESPONSE_STATUS.SUCCESS,
         result
       })
     })
-  })
+    .catch(error => {
+      callback(null, {
+        status: RESPONSE_STATUS.ERROR,
+        result: error
+      })
+    })
 }
 
 module.exports = { invoke }

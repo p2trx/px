@@ -4,24 +4,22 @@ const revision = require('puppeteer/package').puppeteer.chromium_revision
 
 const path = require('path')
 
-var os = require('os');
+var os = require('os')
 
 const getExecutablePath = () => {
   let chromiumExecutablePath = puppeteer.executablePath()
   const isPkg = typeof process.pkg !== 'undefined'
   if (isPkg) {
     if (os.type() === 'Windows_NT') {
-      chromiumExecutablePath = chromiumExecutablePath
-        .replace(
-          /^.*?\\node_modules\\puppeteer\\\.local-chromium/,
-          getBrowserFolder()
-        )
+      chromiumExecutablePath = chromiumExecutablePath.replace(
+        /^.*?\\node_modules\\puppeteer\\\.local-chromium/,
+        getBrowserFolder()
+      )
     } else {
-      chromiumExecutablePath = chromiumExecutablePath
-        .replace(
-          /^.*?\/node_modules\/puppeteer\/\.local-chromium/,
-          getBrowserFolder()
-        )
+      chromiumExecutablePath = chromiumExecutablePath.replace(
+        /^.*?\/node_modules\/puppeteer\/\.local-chromium/,
+        getBrowserFolder()
+      )
     }
   }
   return chromiumExecutablePath
