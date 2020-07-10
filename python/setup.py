@@ -12,7 +12,7 @@ class CustomInstall(install):
 
 setup(
     name='ckpx',
-    version='0.0.11',
+    version='0.0.12',
     packages=find_packages(),
     setup_requires=required_pkgs,
     install_requires=required_pkgs,
