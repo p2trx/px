@@ -1,17 +1,18 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-from px_client.client import Client
+from px_server.helper import download_and_extract_px_server_package
 
 required_pkgs = ['grpcio>=1.27.2', 'grpcio-tools>=1.27.2']
 
 class CustomInstall(install):
     def run(self):
         install.run(self)
-        Client()
+        download_and_extract_px_server_package()
+
 
 setup(
     name='ckpx',
-    version='0.0.10',
+    version='0.0.11',
     packages=find_packages(),
     setup_requires=required_pkgs,
     install_requires=required_pkgs,
