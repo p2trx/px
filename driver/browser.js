@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 const { getExecutablePath } = require('../setup')
+const { waitFor } = require('./wait')
 
 const close = () => {
   const { browser } = global
@@ -28,22 +29,23 @@ const emulateMediaType = type => {
   return page.emulateMediaType(type)
 }
 
-const focus = selector => {
-  const { page } = global
-  return page.focus(selector)
-}
+const focus = selector => waitFor(selector).then(element => element.focus())
 
 const goto = url => {
   const { page } = global
   return page.goto(url)
 }
 
-const launch = async headless => {
+const launch = async (headless, defaultViewport) => {
   const executablePath = getExecutablePath()
-  const browser = await puppeteer.launch({ headless, executablePath })
+  const browser = await puppeteer.launch({
+    headless,
+    executablePath,
+    defaultViewport
+  })
   global.browser = browser
   global.page = await browser.newPage()
-  return setViewport(1024, 768)
+  return browser
 }
 
 const reload = () => {

@@ -14,6 +14,7 @@ message Action {
     oneof action_oneof {
         ClearAndTypeAction clearAndTypeAction = 12;
         ClickAction clickAction = 3;
+        ClickAndWaitForNavigationAction clickAndWaitForNavigationAction = 27;
         CloseAction closeAction = 7;
         CookiesAction cookiesAction = 24;
         DeleteCookieAction deleteCookieAction = 26;
@@ -42,12 +43,21 @@ message Action {
 }
 
 message ClearAndTypeAction { string selector = 1; string text = 2; }
-message ClickAction { string selector = 1; string button = 2; int32 clickCount = 3; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageclickselector-options
+message ClickAction { string selector = 1; ClickOption option = 2; } // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#elementhandleclickoptions
+message ClickAndWaitForNavigationAction { string selector = 1; ClickOption option = 2; WaitOption waitOption = 3; }
 message CloseAction { } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagecloseoptions
 message CookiesAction { } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagecookiesurls
 message DeleteCookieAction { string name = 1; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagedeletecookiecookies
 message DoRequest { repeated Action actions = 1; }
-message DoResponse { string result = 1; }
+message DoResponse {
+    string result = 1;
+    string error = 2;
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 1;
+    };
+    Status status = 3;
+}
 message EmulateAction { string device = 1; } // https://github.com/puppeteer/puppeteer/blob/master/src/DeviceDescriptors.ts
 message EmulateMediaTypeAction { string type = 1; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageemulatemediatypetype
 message EvaluateAction { string pageFunction = 1; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageevaluatepagefunction-args
@@ -57,7 +67,7 @@ message GotoAction { string url = 1; } // https://www.google.com
 message KeyDownAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyPressAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyUpAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
-message LaunchAction { bool headless = 1; string args = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions
+message LaunchAction { bool headless = 1; Viewport defaultViewport = 2; } // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions
 message PdfAction { string path = 1; string format = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagepdfoptions
 message ReloadAction { } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagereloadoptions
 message SelectAction { string selector = 1; repeated string values = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageselectselector-values
@@ -69,3 +79,14 @@ message ScreenshotAction { string path = 1; bool fullPage = 2; } // https://gith
 message TapAction { string selector = 1; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagetapselector
 message TypeAction { string selector = 1; string text = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagetypeselector-text-options
 message WaitAction { int32 time = 1; }
+
+message ClickOption { string button = 1; int32 clickCount = 2; }
+message WaitOption { int32 timeout = 1; string waitUntil = 2; }
+message Viewport {
+    int32 width = 1;
+    int32 height = 2;
+    int32 deviceScaleFactor = 3;
+    bool isMobile = 4;
+    bool hasTouch = 5;
+    bool isLandscape = 6;
+}
