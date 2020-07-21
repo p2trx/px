@@ -93,3 +93,7 @@ class Client:
     def wait(self, time):
         actions = px.Action(waitAction=px.WaitAction(time=time))
         self.do_request(actions)
+
+    def waitFor(self, selector):
+        actions = px.Action(waitForAction=px.WaitForAction(selector=selector))
+        return self.do_request(actions)
