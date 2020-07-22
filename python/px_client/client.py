@@ -82,6 +82,10 @@ class Client:
         actions = px.Action(selectAction=px.SelectAction(selector=selector, values=values))
         self.do_request(actions)
 
+    def reload(self):
+        actions = px.Action(reloadAction=px.ReloadAction())
+        self.do_request(actions)
+
     def type(self, selector, text):
         actions = px.Action(typeAction=px.TypeAction(selector=selector, text=text))
         self.do_request(actions)
@@ -89,3 +93,7 @@ class Client:
     def wait(self, time):
         actions = px.Action(waitAction=px.WaitAction(time=time))
         self.do_request(actions)
+
+    def waitFor(self, selector):
+        actions = px.Action(waitForAction=px.WaitForAction(selector=selector))
+        return self.do_request(actions)
