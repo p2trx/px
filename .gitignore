@@ -16,6 +16,7 @@ python/build
 python/dist
 python/ckpx.egg-info
 python/px_server/package
+.pytest_cache
 
 dist/*
 

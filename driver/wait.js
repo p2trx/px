@@ -11,7 +11,13 @@ const waitForSelector = selector => {
   return page.waitForSelector(selector)
 }
 
+const waitFor = selectorOrXPath => {
+  const { page } = global
+  return page.waitFor(selectorOrXPath)
+}
+
 module.exports = {
   wait,
-  waitForSelector
+  waitForSelector,
+  waitFor
 }

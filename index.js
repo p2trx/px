@@ -13,8 +13,7 @@ const { invoke } = require('./bindings')
 
 const { program } = require('commander')
 
-program
-  .option('-p, --port <value>', 'PX server port', '50000')
+program.option('-p, --port <value>', 'PX server port', '50000')
 
 program.parse(process.argv)
 

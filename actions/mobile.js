@@ -1,9 +1,6 @@
 const driver = require('../driver')
 
-const tap = async ({ selector }) => {
-  await driver.waitForSelector(selector)
-  return driver.tap(selector)
-}
+const tap = ({ selector }) => driver.tap(selector)
 
 module.exports = {
   tap
