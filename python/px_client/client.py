@@ -82,6 +82,10 @@ class Client:
         actions = px.Action(selectAction=px.SelectAction(selector=selector, values=values))
         self.do_request(actions)
 
+    def screenshot(self, path, fullPage):
+        actions = px.Action(screenshotAction=px.ScreenshotAction(path=path, fullPage=fullPage))
+        self.do_request(actions)
+
     def reload(self):
         actions = px.Action(reloadAction=px.ReloadAction())
         self.do_request(actions)
