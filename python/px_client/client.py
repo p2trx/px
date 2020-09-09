@@ -74,6 +74,18 @@ class Client:
         actions = px.Action(gotoAction=px.GotoAction(url=url))
         self.do_request(actions)
 
+    def keyDown(self, key):
+        actions = px.Action(keyDownAction=px.KeyDownAction(key=key))
+        self.do_request(actions)
+
+    def keyPress(self, key):
+        actions = px.Action(keyPressAction=px.KeyPressAction(key=key))
+        self.do_request(actions)
+
+    def keyUp(self, key):
+        actions = px.Action(keyUpAction=px.KeyUpAction(key=key))
+        self.do_request(actions)
+
     def launch(self, headless=None, defaultViewport=None):
         actions = px.Action(launchAction=px.LaunchAction(headless=headless, defaultViewport=defaultViewport))
         self.do_request(actions)
