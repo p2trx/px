@@ -36,12 +36,13 @@ const goto = url => {
   return page.goto(url)
 }
 
-const launch = async (headless, defaultViewport) => {
+const launch = async (headless, defaultViewport, args) => {
   const executablePath = getExecutablePath()
   const browser = await puppeteer.launch({
     headless,
     executablePath,
-    defaultViewport
+    defaultViewport,
+    args
   })
   global.browser = browser
   global.page = await browser.newPage()

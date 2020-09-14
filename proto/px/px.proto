@@ -68,7 +68,7 @@ message GotoAction { string url = 1; } // https://www.google.com
 message KeyDownAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyPressAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
 message KeyUpAction { string key = 1; } // https://github.com/puppeteer/puppeteer/blob/master/lib/USKeyboardLayout.js
-message LaunchAction { bool headless = 1; Viewport defaultViewport = 2; } // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions
+message LaunchAction { bool headless = 1; Viewport defaultViewport = 2; repeated string args = 3; } // https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions
 message PdfAction { string path = 1; string format = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagepdfoptions
 message ReloadAction { } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagereloadoptions
 message SelectAction { string selector = 1; repeated string values = 2; } // https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pageselectselector-values

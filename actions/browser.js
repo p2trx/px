@@ -1,7 +1,7 @@
 const driver = require('../driver')
 
-const launch = ({ headless = false, defaultViewport = null }) => {
-  return driver.launch(headless, defaultViewport)
+const launch = ({ headless = false, defaultViewport = null, args = [] }) => {
+  return driver.launch(headless, defaultViewport, args)
 }
 
 const close = () => {

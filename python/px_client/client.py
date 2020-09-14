@@ -86,8 +86,8 @@ class Client:
         actions = px.Action(keyUpAction=px.KeyUpAction(key=key))
         self.do_request(actions)
 
-    def launch(self, headless=None, defaultViewport=None):
-        actions = px.Action(launchAction=px.LaunchAction(headless=headless, defaultViewport=defaultViewport))
+    def launch(self, headless=None, defaultViewport=None, args=[]):
+        actions = px.Action(launchAction=px.LaunchAction(headless=headless, defaultViewport=defaultViewport, args=args))
         self.do_request(actions)
 
     def select(self, selector, values):
