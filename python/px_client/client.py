@@ -115,5 +115,5 @@ class Client:
         return self.do_request(actions)
 
     def uploadFile(self, selector, paths):
-        actions = px.Action(uploadFileAction=px.UploadFileAction(selector=selector, values=paths))
+        actions = px.Action(uploadFileAction=px.UploadFileAction(selector=selector, paths=paths))
         self.do_request(actions)
