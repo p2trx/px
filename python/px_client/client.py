@@ -113,3 +113,7 @@ class Client:
     def waitFor(self, selector):
         actions = px.Action(waitForAction=px.WaitForAction(selector=selector))
         return self.do_request(actions)
+
+    def uploadFile(self, selector, paths):
+        actions = px.Action(uploadFileAction=px.UploadFileAction(selector=selector, values=paths))
+        self.do_request(actions)
