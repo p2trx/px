@@ -27,10 +27,13 @@ function main(port) {
 
       var server = new Server()
       server.addService(px.Browser.service, { Do: invoke })
-      server.bind(`0.0.0.0:${port}`, ServerCredentials.createInsecure())
+      const bindedPort = server.bind(
+        `0.0.0.0:${port}`,
+        ServerCredentials.createInsecure()
+      )
       console.log('Starting PX server...')
       server.start()
-      console.log(`PX server is running on port ${port}`)
+      console.log(`PX server is running on port ${bindedPort}`)
     })
     .catch(error => {
       console.log('Fail to start PX browser', error)
