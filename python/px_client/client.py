@@ -16,15 +16,15 @@ class Client:
 
     server = None
 
-    url = None
+    server_url = None
 
-    def __init__(self, url=None, debug=False):
-        if url is None:
+    def __init__(self, server_url=None, debug=False):
+        if server_url is None:
             self.server = Server()
-            url = 'localhost:{}'.format(self.server.port)
+            server_url = 'localhost:{}'.format(self.server.port)
 
-        self.url = url
-        self.channel = grpc.insecure_channel(self.url)
+        self.server_url = server_url
+        self.channel = grpc.insecure_channel(self.server_url)
         grpc.channel_ready_future(self.channel).result(timeout=300)
         self.stub = BrowserStub(self.channel)
         self.debug = debug
