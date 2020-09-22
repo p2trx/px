@@ -13,7 +13,8 @@ class Server:
 
     px_server_executable_file_path = None
 
-    def __init__(self):
+    def __init__(self, port=None):
+        self.port = port
         self.setup()
         self.start()
 
@@ -24,9 +25,11 @@ class Server:
         self.px_server_executable_file_path = download_and_extract_px_server_package()
 
     def start(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("",0))
-        self.port = s.getsockname()[1]
+
+        if self.port is None:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.bind(("", 0))
+            self.port = s.getsockname()[1]
 
         logging.info('Start px server from {} file on port {}'.format(self.px_server_executable_file_path, self.port))
         self.process = subprocess.Popen([self.px_server_executable_file_path, '--port', str(self.port)])
