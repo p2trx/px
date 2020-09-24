@@ -5,7 +5,21 @@ from px_server.helper import download_and_extract_px_server_package
 
 logging.getLogger().setLevel(logging.INFO)
 
+
 class Server:
+
+    __instances = {}
+
+    @staticmethod
+    def get_instance(port=None):
+        instance = None
+        if port is not None:
+            instance = Server.__instances[port]
+        if instance is None:
+            instance = Server(port)
+        server_port = instance.port
+        Server.__instances[server_port] = instance
+        return instance
 
     port = None
 

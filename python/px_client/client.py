@@ -6,6 +6,7 @@ import logging
 
 logging.getLogger().setLevel(logging.INFO)
 
+
 class Client:
 
     channel = None
@@ -18,9 +19,12 @@ class Client:
 
     server_url = None
 
-    def __init__(self, server_url=None, debug=False):
+    def __init__(self, server_url=None, debug=False, new_server=False):
         if server_url is None:
-            self.server = Server()
+            if new_server is True:
+                self.server = Server()
+            else:
+                self.server = Server.get_instance()
             server_url = 'localhost:{}'.format(self.server.port)
 
         self.server_url = server_url
