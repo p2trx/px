@@ -8,17 +8,22 @@ logging.getLogger().setLevel(logging.INFO)
 
 class Server:
 
+    __instance = None
+
     __instances = {}
 
     @staticmethod
     def get_instance(port=None):
         instance = None
-        if port is not None:
+        if port is None:
+            if Server.__instance is None:
+                Server.__instance = Server()
+            instance = Server.__instance
+        else:
             instance = Server.__instances[port]
-        if instance is None:
-            instance = Server(port)
-        server_port = instance.port
-        Server.__instances[server_port] = instance
+            if instance is None:
+                instance = Server(port)
+                Server.__instances[port] = instance
         return instance
 
     port = None
