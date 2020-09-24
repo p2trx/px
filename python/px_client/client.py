@@ -19,12 +19,12 @@ class Client:
 
     server_url = None
 
-    def __init__(self, server_url=None, debug=False, new_server=False):
+    def __init__(self, server_url=None, debug=False, new_server=False, server_port=None):
         if server_url is None:
             if new_server is True:
-                self.server = Server()
+                self.server = Server(server_port)
             else:
-                self.server = Server.get_instance()
+                self.server = Server.get_instance(server_port)
             server_url = 'localhost:{}'.format(self.server.port)
 
         self.server_url = server_url
