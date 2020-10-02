@@ -4,8 +4,7 @@ const type = ({ selector, text }) => driver.type(selector, text)
 
 const clearAndType = async ({ selector, text }) => {
   await driver.focus(selector)
-  await driver.keydown('Control')
-  await driver.keypress('A')
+  await driver.click(selector, { clickCount: 3 })
   await driver.keyup('Control')
   await driver.keypress('Backspace')
   return driver.type(selector, text)
