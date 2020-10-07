@@ -13,7 +13,7 @@ class CustomInstall(install):
 
 setup(
     name='ckpx',
-    version='0.0.' + datetime.today().strftime('%y%d%m.%H%M'),
+    version='0.1.' + datetime.today().strftime('%y%m%d.%H%M'),
     packages=find_packages(),
     setup_requires=required_pkgs,
     install_requires=required_pkgs,
