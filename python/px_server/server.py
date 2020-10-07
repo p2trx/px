@@ -5,7 +5,26 @@ from px_server.helper import download_and_extract_px_server_package
 
 logging.getLogger().setLevel(logging.INFO)
 
+
 class Server:
+
+    __instance = None
+
+    __instances = {}
+
+    @staticmethod
+    def get_instance(port=None):
+        instance = None
+        if port is None:
+            if Server.__instance is None:
+                Server.__instance = Server()
+            instance = Server.__instance
+        else:
+            instance = Server.__instances[port]
+            if instance is None:
+                instance = Server(port)
+                Server.__instances[port] = instance
+        return instance
 
     port = None
 
@@ -13,7 +32,8 @@ class Server:
 
     px_server_executable_file_path = None
 
-    def __init__(self):
+    def __init__(self, port=None):
+        self.port = port
         self.setup()
         self.start()
 
@@ -24,9 +44,11 @@ class Server:
         self.px_server_executable_file_path = download_and_extract_px_server_package()
 
     def start(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("",0))
-        self.port = s.getsockname()[1]
+
+        if self.port is None:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.bind(("", 0))
+            self.port = s.getsockname()[1]
 
         logging.info('Start px server from {} file on port {}'.format(self.px_server_executable_file_path, self.port))
         self.process = subprocess.Popen([self.px_server_executable_file_path, '--port', str(self.port)])
